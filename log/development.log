@@ -1667,3 +1667,112 @@ Compilation failed in require at (eval 250) line 1.
 [Tue Oct 25 17:45:49 2011] [error] Template error in "exception.html.tt": file error - exception.html.tt: No such file or directory
 [Tue Oct 25 17:45:49 2011] [error] file error - exception.html.tt: No such file or directory
 [Tue Oct 25 17:45:49 2011] [debug] 500 Internal Server Error (0.029552s, 33.839/s).
+[Tue Oct 25 23:08:09 2011] [debug] GET /day/monday (Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1).
+[Tue Oct 25 23:08:09 2011] [debug] Dispatching "Kolle::Controller->day".
+[Tue Oct 25 23:08:09 2011] [error] Template error in "controller/day.html.tt": file error - controller/day.html.tt: No such file or directory
+[Tue Oct 25 23:08:09 2011] [error] file error - controller/day.html.tt: No such file or directory
+[Tue Oct 25 23:08:09 2011] [error] Template error in "exception.development.html.tt": file error - exception.development.html.tt: No such file or directory
+[Tue Oct 25 23:08:09 2011] [error] file error - exception.development.html.tt: No such file or directory
+[Tue Oct 25 23:08:09 2011] [error] Template error in "exception.html.tt": file error - exception.html.tt: No such file or directory
+[Tue Oct 25 23:08:09 2011] [error] file error - exception.html.tt: No such file or directory
+[Tue Oct 25 23:08:09 2011] [debug] 500 Internal Server Error (0.029950s, 33.389/s).
+[Tue Oct 25 23:09:13 2011] [debug] GET /day/monday (Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1).
+[Tue Oct 25 23:09:13 2011] [debug] Dispatching "Kolle::Controller->day".
+[Tue Oct 25 23:09:13 2011] [error] Template error in "controller/day.html.tt": file error - controller/day.html.tt: No such file or directory
+[Tue Oct 25 23:09:13 2011] [error] file error - controller/day.html.tt: No such file or directory
+[Tue Oct 25 23:09:13 2011] [error] Template error in "exception.development.html.tt": file error - exception.development.html.tt: No such file or directory
+[Tue Oct 25 23:09:13 2011] [error] file error - exception.development.html.tt: No such file or directory
+[Tue Oct 25 23:09:13 2011] [error] Template error in "exception.html.tt": file error - exception.html.tt: No such file or directory
+[Tue Oct 25 23:09:13 2011] [error] file error - exception.html.tt: No such file or directory
+[Tue Oct 25 23:09:13 2011] [debug] 500 Internal Server Error (0.028640s, 34.916/s).
+[Tue Oct 25 23:09:14 2011] [debug] GET /day/monday (Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1).
+[Tue Oct 25 23:09:14 2011] [debug] Dispatching "Kolle::Controller->day".
+[Tue Oct 25 23:09:14 2011] [error] Template error in "controller/day.html.tt": file error - controller/day.html.tt: No such file or directory
+[Tue Oct 25 23:09:14 2011] [error] file error - controller/day.html.tt: No such file or directory
+[Tue Oct 25 23:09:14 2011] [error] Template error in "exception.development.html.tt": file error - exception.development.html.tt: No such file or directory
+[Tue Oct 25 23:09:14 2011] [error] file error - exception.development.html.tt: No such file or directory
+[Tue Oct 25 23:09:14 2011] [error] Template error in "exception.html.tt": file error - exception.html.tt: No such file or directory
+[Tue Oct 25 23:09:14 2011] [error] file error - exception.html.tt: No such file or directory
+[Tue Oct 25 23:09:14 2011] [debug] 500 Internal Server Error (0.029030s, 34.447/s).
+[Tue Oct 25 23:09:14 2011] [debug] GET /day/monday (Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1).
+[Tue Oct 25 23:09:14 2011] [debug] Dispatching "Kolle::Controller->day".
+[Tue Oct 25 23:09:14 2011] [error] Template error in "controller/day.html.tt": file error - controller/day.html.tt: not found
+[Tue Oct 25 23:09:14 2011] [error] file error - controller/day.html.tt: not found
+[Tue Oct 25 23:09:14 2011] [error] Template error in "exception.development.html.tt": file error - exception.development.html.tt: not found
+[Tue Oct 25 23:09:14 2011] [error] file error - exception.development.html.tt: not found
+[Tue Oct 25 23:09:14 2011] [error] Template error in "exception.html.tt": file error - exception.html.tt: not found
+[Tue Oct 25 23:09:14 2011] [error] file error - exception.html.tt: not found
+[Tue Oct 25 23:09:14 2011] [debug] 500 Internal Server Error (0.030328s, 32.973/s).
+[Tue Oct 25 23:09:15 2011] [debug] GET /day/monday (Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1).
+[Tue Oct 25 23:09:15 2011] [debug] Dispatching "Kolle::Controller->day".
+[Tue Oct 25 23:09:15 2011] [error] Template error in "controller/day.html.tt": file error - controller/day.html.tt: No such file or directory
+[Tue Oct 25 23:09:15 2011] [error] file error - controller/day.html.tt: No such file or directory
+[Tue Oct 25 23:09:15 2011] [error] Template error in "exception.development.html.tt": file error - exception.development.html.tt: No such file or directory
+[Tue Oct 25 23:09:15 2011] [error] file error - exception.development.html.tt: No such file or directory
+[Tue Oct 25 23:09:15 2011] [error] Template error in "exception.html.tt": file error - exception.html.tt: No such file or directory
+[Tue Oct 25 23:09:15 2011] [error] file error - exception.html.tt: No such file or directory
+[Tue Oct 25 23:09:15 2011] [debug] 500 Internal Server Error (0.029525s, 33.870/s).
+[Tue Oct 25 23:09:16 2011] [debug] GET /day/monday (Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1).
+[Tue Oct 25 23:09:16 2011] [debug] Dispatching "Kolle::Controller->day".
+[Tue Oct 25 23:09:16 2011] [error] Template error in "controller/day.html.tt": file error - controller/day.html.tt: No such file or directory
+[Tue Oct 25 23:09:16 2011] [error] file error - controller/day.html.tt: No such file or directory
+[Tue Oct 25 23:09:16 2011] [error] Template error in "exception.development.html.tt": file error - exception.development.html.tt: No such file or directory
+[Tue Oct 25 23:09:16 2011] [error] file error - exception.development.html.tt: No such file or directory
+[Tue Oct 25 23:09:16 2011] [error] Template error in "exception.html.tt": file error - exception.html.tt: No such file or directory
+[Tue Oct 25 23:09:16 2011] [error] file error - exception.html.tt: No such file or directory
+[Tue Oct 25 23:09:16 2011] [debug] 500 Internal Server Error (0.029969s, 33.368/s).
+[Tue Oct 25 23:09:16 2011] [debug] GET /day/monday (Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1).
+[Tue Oct 25 23:09:16 2011] [debug] Dispatching "Kolle::Controller->day".
+[Tue Oct 25 23:09:16 2011] [error] Template error in "controller/day.html.tt": file error - controller/day.html.tt: not found
+[Tue Oct 25 23:09:16 2011] [error] file error - controller/day.html.tt: not found
+[Tue Oct 25 23:09:16 2011] [error] Template error in "exception.development.html.tt": file error - exception.development.html.tt: not found
+[Tue Oct 25 23:09:16 2011] [error] file error - exception.development.html.tt: not found
+[Tue Oct 25 23:09:16 2011] [error] Template error in "exception.html.tt": file error - exception.html.tt: not found
+[Tue Oct 25 23:09:16 2011] [error] file error - exception.html.tt: not found
+[Tue Oct 25 23:09:16 2011] [debug] 500 Internal Server Error (0.025213s, 39.662/s).
+[Tue Oct 25 23:09:17 2011] [debug] GET /day/monday (Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1).
+[Tue Oct 25 23:09:17 2011] [debug] Dispatching "Kolle::Controller->day".
+[Tue Oct 25 23:09:17 2011] [error] Template error in "controller/day.html.tt": file error - controller/day.html.tt: No such file or directory
+[Tue Oct 25 23:09:17 2011] [error] file error - controller/day.html.tt: No such file or directory
+[Tue Oct 25 23:09:17 2011] [error] Template error in "exception.development.html.tt": file error - exception.development.html.tt: No such file or directory
+[Tue Oct 25 23:09:17 2011] [error] file error - exception.development.html.tt: No such file or directory
+[Tue Oct 25 23:09:17 2011] [error] Template error in "exception.html.tt": file error - exception.html.tt: No such file or directory
+[Tue Oct 25 23:09:17 2011] [error] file error - exception.html.tt: No such file or directory
+[Tue Oct 25 23:09:17 2011] [debug] 500 Internal Server Error (0.028380s, 35.236/s).
+[Tue Oct 25 23:09:17 2011] [debug] GET /day/monday (Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1).
+[Tue Oct 25 23:09:17 2011] [debug] Dispatching "Kolle::Controller->day".
+[Tue Oct 25 23:09:17 2011] [error] Template error in "controller/day.html.tt": file error - controller/day.html.tt: not found
+[Tue Oct 25 23:09:17 2011] [error] file error - controller/day.html.tt: not found
+[Tue Oct 25 23:09:17 2011] [error] Template error in "exception.development.html.tt": file error - exception.development.html.tt: not found
+[Tue Oct 25 23:09:17 2011] [error] file error - exception.development.html.tt: not found
+[Tue Oct 25 23:09:17 2011] [error] Template error in "exception.html.tt": file error - exception.html.tt: not found
+[Tue Oct 25 23:09:17 2011] [error] file error - exception.html.tt: not found
+[Tue Oct 25 23:09:17 2011] [debug] 500 Internal Server Error (0.029640s, 33.738/s).
+[Tue Oct 25 23:09:18 2011] [debug] GET /day/monday (Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1).
+[Tue Oct 25 23:09:18 2011] [debug] Dispatching "Kolle::Controller->day".
+[Tue Oct 25 23:09:18 2011] [error] Template error in "controller/day.html.tt": file error - controller/day.html.tt: No such file or directory
+[Tue Oct 25 23:09:18 2011] [error] file error - controller/day.html.tt: No such file or directory
+[Tue Oct 25 23:09:18 2011] [error] Template error in "exception.development.html.tt": file error - exception.development.html.tt: No such file or directory
+[Tue Oct 25 23:09:18 2011] [error] file error - exception.development.html.tt: No such file or directory
+[Tue Oct 25 23:09:18 2011] [error] Template error in "exception.html.tt": file error - exception.html.tt: No such file or directory
+[Tue Oct 25 23:09:18 2011] [error] file error - exception.html.tt: No such file or directory
+[Tue Oct 25 23:09:18 2011] [debug] 500 Internal Server Error (0.033382s, 29.956/s).
+[Tue Oct 25 23:09:18 2011] [debug] GET /day/monday (Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1).
+[Tue Oct 25 23:09:18 2011] [debug] Dispatching "Kolle::Controller->day".
+[Tue Oct 25 23:09:18 2011] [error] Template error in "controller/day.html.tt": file error - controller/day.html.tt: not found
+[Tue Oct 25 23:09:18 2011] [error] file error - controller/day.html.tt: not found
+[Tue Oct 25 23:09:18 2011] [error] Template error in "exception.development.html.tt": file error - exception.development.html.tt: not found
+[Tue Oct 25 23:09:18 2011] [error] file error - exception.development.html.tt: not found
+[Tue Oct 25 23:09:18 2011] [error] Template error in "exception.html.tt": file error - exception.html.tt: not found
+[Tue Oct 25 23:09:18 2011] [error] file error - exception.html.tt: not found
+[Tue Oct 25 23:09:18 2011] [debug] 500 Internal Server Error (0.032602s, 30.673/s).
+[Tue Oct 25 23:10:43 2011] [debug] Your secret passphrase needs to be changed!!!
+[Tue Oct 25 23:10:43 2011] [debug] GET /day/monday (Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1).
+[Tue Oct 25 23:10:43 2011] [debug] Dispatching "Kolle::Controller->day".
+[Tue Oct 25 23:10:43 2011] [debug] 200 OK (0.156506s, 6.390/s).
+[Tue Oct 25 23:10:45 2011] [debug] GET /day/monday (Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1).
+[Tue Oct 25 23:10:45 2011] [debug] Dispatching "Kolle::Controller->day".
+[Tue Oct 25 23:10:45 2011] [debug] 200 OK (0.006762s, 147.885/s).
+[Tue Oct 25 23:10:45 2011] [debug] GET /day/monday (Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.1 (KHTML, like Gecko) Ubuntu/11.04 Chromium/14.0.835.202 Chrome/14.0.835.202 Safari/535.1).
+[Tue Oct 25 23:10:45 2011] [debug] Dispatching "Kolle::Controller->day".
+[Tue Oct 25 23:10:45 2011] [debug] 200 OK (0.004824s, 207.297/s).
