@@ -1,1 +1,1 @@
-sudo morbo /home/ath88/work/kolle/script/kolle --verbose --listen http://0.0.0.0:80
+sudo morbo /home/ath88/work/Kolletilmelding/script/kolle --verbose --listen http://0.0.0.0:80
