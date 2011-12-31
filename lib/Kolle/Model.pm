@@ -54,6 +54,11 @@ sub update_user {
 sub create_user {
 
   #create empty user
+  $dbh->do('
+    INSERT INTO user (firstname, lastname, role, clanname, email, day1, day2, day3, day4, day5, day6)
+    VALUES (?, ?, ?, ?, ?, 0, 0, 0, 0, 0, 0)
+  ', undef, $firstname, $lastname, $role, $clanname, $email);
+
   #send mail to user
 
   return 1;
