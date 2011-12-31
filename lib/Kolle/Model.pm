@@ -6,6 +6,10 @@ use warnings;
 use base 'Exporter';
 our @EXPORT = ('user_exists', 'day_exists' ,'get_days', 'get_day', 'get_user');
 
+use DBI;
+
+my $dbh = DBI->connect('DBI:mysql:kolle', 'root', '') || die "Could not connect to database: $DBI::errstr";
+
 my $days = { monday    => 1, mandag  => 1,
              tuesday   => 2, tirsdag => 2,
              wednesday => 3, onsdag  => 3,
