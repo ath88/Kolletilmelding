@@ -6,12 +6,12 @@ use warnings;
 use base 'Exporter';
 our @EXPORT = ('user_exists', 'day_exists' ,'get_days', 'get_day', 'get_user');
 
-my $days = { monday    => 1,
-             tuesday   => 2,
-             wednesday => 3,
-             thursday  => 4,
-             friday    => 5,
-             saturday  => 6,
+my $days = { monday    => 1, mandag  => 1,
+             tuesday   => 2, tirsdag => 2,
+             wednesday => 3, onsdag  => 3,
+             thursday  => 4, torsdag => 4,
+             friday    => 5, fredag  => 5,
+             saturday  => 6, loerdag => 6,
 };
 
 sub user_exists {
