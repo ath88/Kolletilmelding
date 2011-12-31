@@ -16,7 +16,7 @@ sub frontpage {
 
   my $data = get_days();
 
-  return $self->render ( message => 'frontpage', data => $data );
+  return $self->render ( message => 'frontpage', dataset => $data );
 }
 
 sub day {
@@ -28,7 +28,7 @@ sub day {
 
   my $data => get_day($weekday);
 
-  return $self->render ( message => $weekday, data => $data );
+  return $self->render ( message => $weekday, dataset => $data );
 }
 
 sub newedit {
@@ -52,7 +52,7 @@ sub edit {
 
   my $data => get_user($user_iden);
 
-  return $self->render ( message => $user_iden, data => $data );
+  return $self->render ( message => $user_iden, dataset => $data );
 }
 
 1;
