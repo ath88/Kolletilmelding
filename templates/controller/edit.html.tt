@@ -6,7 +6,4 @@
   <input type="submit" value="Submit" />
 </form>
 
-<a href="<%== url_for %>">click here</a>
-to reload the page or
-<a href="/index.html">here</a>
-to move forward to a static page.
+edit
