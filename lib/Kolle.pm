@@ -25,7 +25,7 @@ sub startup {
   # Normal route to controller
   $r->route('/')->to('controller#frontpage');
   $r->route('/day/:weekday')->to('controller#day');
-  $r->route('/edit/:id')->via('POST')->to('controller#newedit');
+  $r->route('/edit/:id')->via('POST')->to('controller#postedit');
   $r->route('/edit/:id')->to('controller#edit');
 }
 

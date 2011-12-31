@@ -31,15 +31,19 @@ sub day {
   return $self->render ( message => $weekday, dataset => $data );
 }
 
-sub newedit {
+sub postedit {
   my $self = shift;
   my $user_iden = $self->stash('id');
-  $log->debug("Viewing newedit");
+  $log->debug("Viewing postedit");
 
   # check if user exists, return error if not
   return $self->render ( message => "$user_iden doesnt exist" ) if !user_exists($user_iden);
 
-  return $self->render ( message => 'postedit!');
+  my $postdata;
+
+  return edit ( $self, $postdata);
+
+  #$self->render ( message => 'postedit!');
 }
 
 sub edit {
