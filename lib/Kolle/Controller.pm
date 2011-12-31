@@ -5,9 +5,14 @@ use warnings;
 
 use Mojo::Base 'Mojolicious::Controller';
 use Kolle::Model;
+use Mojo::Log;
+
+my $log = Mojo::Log->new; 
 
 sub frontpage {
+  $log->debug("Viewing frontpage");
   my $self = shift;
+
 
   my $data = get_days();
 
@@ -17,6 +22,7 @@ sub frontpage {
 sub day {
   my $self = shift;
   my $weekday = $self->stash('weekday');
+  $log->debug("Viewing day '$weekday'");
 
   return $self->render ( message => "$weekday doesnt exist" ) if !day_exists($weekday);
 
@@ -28,6 +34,7 @@ sub day {
 sub newedit {
   my $self = shift;
   my $user_iden = $self->stash('id');
+  $log->debug("Viewing newedit");
 
   # check if user exists, return error if not
   return $self->render ( message => "$user_iden doesnt exist" ) if !user_exists($user_iden);
@@ -38,6 +45,7 @@ sub newedit {
 sub edit {
   my $self = shift;
   my $user_iden = $self->stash('id');
+  $log->debug("Viewing edit");
 
   # check if user exists, return error if not
   return $self->render ( message => "$user_iden doesnt exist" ) if !user_exists($user_iden);
