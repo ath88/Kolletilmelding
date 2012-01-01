@@ -52,6 +52,7 @@ sub update_user {
 }
 
 sub create_user {
+  my ($firstname, $lastname, $role, $clanname, $email) = @_;
 
   #create empty user
   $dbh->do('
@@ -60,6 +61,7 @@ sub create_user {
   ', undef, $firstname, $lastname, $role, $clanname, $email);
 
   #send mail to user
+  #TODO
 
   return 1;
 }
