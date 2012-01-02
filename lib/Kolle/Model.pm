@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use base 'Exporter';
-our @EXPORT = ('user_exists', 'day_exists' ,'get_days', 'get_day', 'get_user', 'create_user');
+our @EXPORT = ('user_exists', 'day_exists' ,'get_days', 'get_day', 'get_user', 'update_user', 'create_user');
 
 use DBI;
 
