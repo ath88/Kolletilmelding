@@ -58,6 +58,14 @@ sub get_user {
 }
 
 sub update_user {
+  my ($id, $day1, $day2, $day3, $day4, $day5, $day6) = @_;
+
+  $dbh->do('
+    UPDATE user 
+    SET day1 = ?, day2 = ?, day3 = ?, day4 = ?, day5 = ?, day6 = ?
+    WHERE id = ?
+  ',undef, $day1, $day2, $day3, $day4, $day5, $day6, $id);
+
   return 1;
 }
 
