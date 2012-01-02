@@ -41,6 +41,16 @@ sub get_day {
 }
 
 sub get_user {
+  my ($id) = @_;
+
+  my $result_ref = $dbh->selectrow_hashref('
+    SELECT * 
+    FROM user
+    WHERE id = ?
+  ',undef,$id);
+
+  return $result_ref;
+
   return { name => 'Mikkel', 
            rank => 'Klanleder', 
            days => {wednesday => undef, 
