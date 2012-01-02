@@ -6,10 +6,13 @@ use Test::Mojo;
 
 use Data::Dump qw(dump);
 
-use Kolle::Model;
 
 use_ok 'Kolle';
 use_ok 'Kolle::Model';
+
+use Kolle::Model;
+Kolle::Model::_truncate();
+#TODO
 
 my $t = Test::Mojo->new('Kolle');
 $t->get_ok('/')->content_like(qr/frontpage/i);
