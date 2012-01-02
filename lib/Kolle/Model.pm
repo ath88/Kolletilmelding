@@ -76,4 +76,10 @@ sub create_user {
   return 1;
 }
 
+sub _truncate {
+  $dbh->do('
+    truncate table user
+  ');
+}
+
 1;
