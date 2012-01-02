@@ -24,6 +24,11 @@ $t->get_ok('/day/friday')->content_like(qr/friday/i);
 
 
 create_user('hans','christian','1','klan knold','blah@aths.dk');
+create_user('peter','christian','1','klan knold','blah@aths.dk');
+create_user('tor','christian','1','klan knold','blah@aths.dk');
+create_user('jens','christian','1','klan knold','blah@aths.dk');
+create_user('birk','christian','1','klan knold','blah@aths.dk');
+create_user('lars','christian','1','klan knold','blah@aths.dk');
 
 my $user_ref = get_user('1');
 
@@ -31,7 +36,12 @@ ok($user_ref->{firstname} eq 'hans');
 ok($user_ref->{lastname} eq 'christian');
 ok($user_ref->{email} eq 'blah@aths.dk');
 
-update_user('1',1,0,1,0,1,1);
+update_user('1',1,0,1,0,0,1);
+update_user('2',1,0,1,0,1,1);
+update_user('3',1,1,0,1,1,1);
+update_user('4',1,0,1,0,0,0);
+update_user('5',1,0,1,1,1,0);
+update_user('6',1,1,1,0,1,1);
 
 $user_ref = get_user('1');
 
