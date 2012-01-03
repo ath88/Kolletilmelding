@@ -24,7 +24,7 @@ sub day {
   my $weekday = $self->stash('weekday');
   $log->debug("Viewing day '$weekday'");
 
-  return $self->render ( message => "$weekday doesnt exist" ) if !day_exists($weekday);
+  return $self->redirect_to ('/', error => "unknown weekday" ) if !day_exists($weekday);
 
   my $data => get_day($weekday);
 
@@ -34,12 +34,13 @@ sub day {
 sub postedit {
   my $self = shift;
   my $user_iden = $self->stash('id');
+
+  return $self->redirect_to ('/', error => "Don't do that, mkay?" ) if !user_exists($user_iden);
   $log->debug("Viewing postedit");
 
-  # check if user exists, return error if not
-  return $self->render ( message => "$user_iden doesnt exist" ) if !user_exists($user_iden);
-
   my $postdata;
+  #update_user($user_iden);
+  
 
   return edit ( $self, $postdata);
 
@@ -52,7 +53,7 @@ sub edit {
   $log->debug("Viewing edit");
 
   # check if user exists, return error if not
-  return $self->render ( message => "$user_iden doesnt exist" ) if !user_exists($user_iden);
+  return $self->redirect_to ('/', error => "$user_iden doesnt exist" ) if !user_exists($user_iden);
 
   my $data => get_user($user_iden);
 
