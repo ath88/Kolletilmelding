@@ -20,7 +20,7 @@ $t->get_ok('/day/monday')->content_like(qr/monday/i);
 $t->get_ok('/day/tuesday')->content_like(qr/tuesday/i);
 $t->get_ok('/day/friday')->content_like(qr/friday/i);
 
-#$t->get_ok('/edit/1')->content_like(qr/unknown/i);
+$t->get_ok('/edit/1')->content_like(qr/unknown/i);
 
 ok( !user_exists('1') );
 
@@ -50,7 +50,7 @@ $user_ref = get_user('1');
 
 ok($user_ref->{day1} eq '1');
 
-#$t->get_ok('/edit/1')->content_like(qr/hans/i);
+$t->get_ok('/edit/1')->content_like(qr/hans/i);
 
 
 done_testing();
