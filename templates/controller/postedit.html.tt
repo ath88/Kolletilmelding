@@ -1,9 +1,11 @@
-% layout 'default';
-% title 'Welcome';
-<h2><%= $message %></h2>
+[% WRAPPER layout.tt %]
 
-<form name="input" action="edit/hello123" method="post">
-  <input type="submit" value="Submit" />
-</form>
+  <h2>[% message %]</h2>
 
-postedit
+  <form name="input" action="edit/hello123" method="post">
+    <input type="submit" value="Submit" />
+  </form>
+
+  postedit
+
+[% END %]
