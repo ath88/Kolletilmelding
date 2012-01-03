@@ -16,7 +16,7 @@ sub frontpage {
 
   my $data = get_days();
 
-  return $self->render ( message => 'frontpage', dataset => $data );
+  return $self->render ( title => 'front', message => 'frontpage', dataset => $data );
 }
 
 sub day {
