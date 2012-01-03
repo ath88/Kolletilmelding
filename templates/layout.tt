@@ -1,4 +1,8 @@
 <!doctype html><html>
   <head><title>[% title %]</title></head>
-  <body>[% content %]</body>
+  <body>
+    [% INCLUDE error_and_message.tt %]    
+
+    [% content %]
+  </body>
 </html>

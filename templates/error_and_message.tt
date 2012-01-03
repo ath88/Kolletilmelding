@@ -1,0 +1,8 @@
+<span class="message">
+  [% message %]
+</span>
+<span class="error">
+  [% error %]
+</span>
+
+
