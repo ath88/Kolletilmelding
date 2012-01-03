@@ -1,7 +1,6 @@
 [% WRAPPER layout.tt %]
 
-  <h2>[% message %]</h2>
-  day
+  <h2>[% day %]</h2>
 
 [% END %]
 

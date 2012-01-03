@@ -1,6 +1,29 @@
 [% WRAPPER layout.tt %]
 
-  <h2>[% message %]</h2>
-  frontpage
+  <table border=1 width='100%'>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <a href='day/mandag'>Mandag</a>
+      </td>
+      <td>
+  <a href='day/tirsdag'>Tirsdag</a>
+      </td>
+      <td>
+  <a href='day/onsdag'>Onsdag</a>
+      </td>
+      <td>
+  <a href='day/torsdag'>Torsdag</a>
+      </td>
+      <td>
+  <a href='day/fredag'>Fredag</a>
+      </td>
+      <td>
+  <a href='day/loerdag'>L&oslash;rdag</a>
+      </td>
+    </tr>
 
+  
+  </table>
 [% END %]
