@@ -1,8 +1,11 @@
-<span class="message">
+<span class="success">
   [% message %]
 </span>
 <span class="error">
   [% error %]
+</span>
+<span class="debug">
+  [% debug %]
 </span>
 
 
