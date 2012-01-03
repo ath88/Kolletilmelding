@@ -7,7 +7,11 @@ use Mojo::Base 'Mojolicious::Controller';
 use Kolle::Model;
 use Mojo::Log;
 
+use String::CamelCase qw(camelize);
+
 my $log = Mojo::Log->new; 
+
+my $title = "M&oslash;lle&aring; divisions seniorkolleuge";
 
 sub frontpage {
   $log->debug("Viewing frontpage");
@@ -18,7 +22,7 @@ sub frontpage {
 
   my $error = $self->session->{'error'};
   delete $self->session->{'error'};
-  return $self->render ( title => 'front', error => $error, dataset => $data );
+  return $self->render ( error => $error, dataset => $data, title => $title );
 }
 
 sub day {
@@ -29,11 +33,16 @@ sub day {
     $self->session->{'error'} = "Unknown weekday";
     return $self->redirect_to ('/');
   }
+
+
   $log->debug("Viewing day '$weekday'");
 
   my $data => get_day($weekday);
 
-  return $self->render ( day => $weekday, dataset => $data );
+  $weekday = camelize($weekday);
+  $weekday =~ s/oe/&oslash;/;
+
+  return $self->render ( dataset => $data, day => $weekday, title => $title);
 }
 
 sub postedit {
@@ -70,7 +79,7 @@ sub edit {
 
   my $error = $self->session->{'error'};
   delete $self->session->{'error'};
-  return $self->render ( message => $user_iden, error => $error, dataset => $data );
+  return $self->render ( message => $user_iden, error => $error, dataset => $data, title => $title);
 }
 
 1;
