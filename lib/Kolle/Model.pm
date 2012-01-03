@@ -18,9 +18,17 @@ my $days = { monday    => 1, mandag  => 1,
              saturday  => 6, loerdag => 6,
 };
 
+# check if user exists, return result
 sub user_exists {
-  my $user = shift;
-  return 1 if $user =~ m/123/;
+  my $id = shift;
+
+  my $result_ref = $dbh->selectrow_hashref('
+    SELECT * 
+    FROM user
+    WHERE id = ?
+  ',undef,$id);
+
+  return $result_ref;
 }
 
 sub day_exists {
@@ -36,6 +44,23 @@ sub get_days {
 }
 
 sub get_day {
+  my ($day) = @_;
+
+  my $weekday = $days->{$day};
+
+  my $sth = $dbh->prepare("
+    SELECT firstname, lastname, clanname 
+    FROM user 
+    WHERE day$weekday = 1
+  ");
+  
+  $sth->execute();
+
+  my $array_ref = $sth->fetchall_arrayref;
+  
+  return $array_ref;
+  
+
   return { name  => 'be late', 
            name2 => undef };
 }
@@ -51,10 +76,10 @@ sub get_user {
 
   return $result_ref;
 
-  return { name => 'Mikkel', 
-           rank => 'Klanleder', 
-           days => {wednesday => undef, 
-                    friday => 'be latez'} };
+#  return { name => 'Mikkel', 
+#           rank => 'Klanleder', 
+#           days => {wednesday => undef, 
+#                    friday => 'be latez'} };
 }
 
 sub update_user {
