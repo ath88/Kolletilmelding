@@ -15,12 +15,26 @@ Kolle::Model::_truncate();
 #TODO remove _truncate()
 
 my $t = Test::Mojo->new('Kolle');
-$t->get_ok('/')->content_like(qr/frontpage/i);
-$t->get_ok('/day/monday')->content_like(qr/monday/i);
-$t->get_ok('/day/tuesday')->content_like(qr/tuesday/i);
-$t->get_ok('/day/friday')->content_like(qr/friday/i);
 
-$t->get_ok('/edit/1')->content_like(qr/unknown/i);
+# does root yield frontpage?
+$t->get_ok('/')->content_like(qr/frontpage/i);
+
+# testing if days work
+$t->get_ok('/day/monday',  'get monday'  )->content_like(qr/monday/i ,       'content monday');
+$t->get_ok('/day/tuesday', 'get tuesday' )->content_like(qr/tuesday/i,       'content tuesday');
+$t->get_ok('/day/friday',  'get friday'  )->content_like(qr/friday/i,        'content fridag');
+$t->get_ok('/day/Mandag',  'get Mandag'  )->content_like(qr/mandag/i,        'content mandag');
+$t->get_ok('/day/tirsdag', 'get tirsdag' )->content_like(qr/tirsdag/i,       'content tirsdag');
+$t->get_ok('/day/loerdag', 'get loerdag' )->content_like(qr/l&oslash;rdag/i, "content l&oslash;rdag");
+
+
+# trying to edit nonexisting users
+$t->get_ok('/edit/bogus')->content_like(qr/unknown/i);
+$t->get_ok('/edit/nonexisting')->content_like(qr/unknown/i);
+
+
+
+
 
 ok( !user_exists('1') );
 
