@@ -49,7 +49,7 @@ sub postedit {
   my $self = shift;
   my $user_iden = $self->stash('id');
 
-  if ( !user_exists($user_iden) ) {
+  if ( !get_user($user_iden) ) {
     $self->session->{'error'} = "Don't do that, mkay?";
     return $self->redirect_to ('/');
   }
@@ -68,14 +68,14 @@ sub edit {
   my $user_iden = $self->stash('id');
   $log->debug("Viewing edit");
 
+  my $data => get_user($user_iden);
   # check if user exists, return error if not
-  if ( !user_exists($user_iden) ) {
+  if ( !$data ) {
     $self->session->{'error'} = "Unknown ID";
     return $self->redirect_to ('/');
   }
 
 
-  my $data => get_user($user_iden);
 
   my $error = $self->session->{'error'};
   delete $self->session->{'error'};
