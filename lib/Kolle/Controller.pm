@@ -47,9 +47,9 @@ sub day {
 
 sub postedit {
   my $self = shift;
-  my $user_iden = $self->stash('id');
+  my $key = $self->stash('key');
 
-  if ( !get_user($user_iden) ) {
+  if ( !get_user($key) ) {
     $self->session->{'error'} = "Don't do that, mkay?";
     return $self->redirect_to ('/');
   }
@@ -65,10 +65,10 @@ sub postedit {
 
 sub edit {
   my $self = shift;
-  my $user_iden = $self->stash('id');
+  my $key = $self->stash('key');
   $log->debug("Viewing edit");
 
-  my $data => get_user($user_iden);
+  my $data = get_user($key);
   # check if user exists, return error if not
   if ( !$data ) {
     $self->session->{'error'} = "Unknown ID";

@@ -6,7 +6,13 @@ use warnings;
 use base 'Exporter';
 our @EXPORT = ('day_exists' ,'get_days', 'get_day', 'get_user', 'update_user', 'create_user');
 
+use String::Random qw(random_string);
 use DBI;
+
+use Email::Sender::Simple qw(sendmail);
+use Email::Simple;
+use Email::Simple::Creator;
+  
 
 my $dbh = DBI->connect('DBI:mysql:kolle', 'root', '') || die "Could not connect to database: $DBI::errstr";
 
@@ -53,25 +59,25 @@ sub get_day {
 }
 
 sub get_user {
-  my ($id) = @_;
+  my ($key) = @_;
 
   my $result_ref = $dbh->selectrow_hashref('
     SELECT * 
     FROM user
-    WHERE id = ?
-  ',undef,$id);
+    WHERE userkey = ?
+  ',undef,$key);
 
   return $result_ref;
 }
 
 sub update_user {
-  my ($id, $day1, $day2, $day3, $day4, $day5, $day6) = @_;
+  my ($key, $day1, $day2, $day3, $day4, $day5, $day6) = @_;
 
   $dbh->do('
     UPDATE user 
     SET day1 = ?, day2 = ?, day3 = ?, day4 = ?, day5 = ?, day6 = ?
-    WHERE id = ?
-  ',undef, $day1, $day2, $day3, $day4, $day5, $day6, $id);
+    WHERE userkey = ?
+  ',undef, $day1, $day2, $day3, $day4, $day5, $day6, $key);
 
   return 1;
 }
@@ -79,16 +85,31 @@ sub update_user {
 sub create_user {
   my ($firstname, $lastname, $role, $clanname, $email) = @_;
 
+  my $random_string = random_string('c'x40);
+
   #create empty user
   $dbh->do('
-    INSERT INTO user (firstname, lastname, role, clanname, email, day1, day2, day3, day4, day5, day6)
-    VALUES (?, ?, ?, ?, ?, 0, 0, 0, 0, 0, 0)
-  ', undef, $firstname, $lastname, $role, $clanname, $email);
+    INSERT INTO user (firstname, lastname, role, clanname, email, userkey, day1, day2, day3, day4, day5, day6)
+    VALUES (?, ?, ?, ?, ?, ?, 0, 0, 0, 0, 0, 0)
+  ', undef, $firstname, $lastname, $role, $clanname, $email, $random_string);
 
   #send mail to user
-  #TODO
 
-  return 1;
+  #TODO remove default-adress
+  $email = 'ath88@winters';
+
+  my $mail = Email::Simple->create(
+    header => [
+      To      => "\"$firstname $lastname\" <$email>",
+      From    => '"Asbjoern" <senior@moelleaa.dk>',
+      Subject => "Tilmelding til Divisionskolleugen",
+    ],
+    body => "Her er dit link:\n http://localhost/edit/$random_string",
+  );
+
+  sendmail($mail);
+
+  return $random_string;
 }
 
 sub _truncate {
