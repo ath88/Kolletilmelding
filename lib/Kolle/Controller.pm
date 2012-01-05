@@ -7,6 +7,7 @@ use Mojo::Base 'Mojolicious::Controller';
 use Kolle::Model;
 use Mojo::Log;
 
+use Data::Dump qw(dump);
 use String::CamelCase qw(camelize);
 
 my $log = Mojo::Log->new; 
@@ -79,7 +80,7 @@ sub edit {
 
   my $error = $self->session->{'error'};
   delete $self->session->{'error'};
-  return $self->render ( message => $user_iden, error => $error, dataset => $data, title => $title);
+  return $self->render ( message => $key, error => $error, debug => dump($data), title => $title);
 }
 
 1;
