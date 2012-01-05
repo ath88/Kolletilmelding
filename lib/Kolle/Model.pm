@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use base 'Exporter';
-our @EXPORT = ('user_exists', 'day_exists' ,'get_days', 'get_day', 'get_user', 'update_user', 'create_user');
+our @EXPORT = ('day_exists' ,'get_days', 'get_day', 'get_user', 'update_user', 'create_user');
 
 use DBI;
 
@@ -17,19 +17,6 @@ my $days = { Monday    => 1, Mandag  => 1,
              Friday    => 5, Fredag  => 5,
              Saturday  => 6, Loerdag => 6,
 };
-
-# check if user exists, return result
-sub user_exists {
-  my $id = shift;
-
-  my $result_ref = $dbh->selectrow_hashref('
-    SELECT * 
-    FROM user
-    WHERE id = ?
-  ',undef,$id);
-
-  return $result_ref;
-}
 
 sub day_exists {
   my $weekday = shift;
@@ -75,11 +62,6 @@ sub get_user {
   ',undef,$id);
 
   return $result_ref;
-
-#  return { name => 'Mikkel', 
-#           rank => 'Klanleder', 
-#           days => {wednesday => undef, 
-#                    friday => 'be latez'} };
 }
 
 sub update_user {
