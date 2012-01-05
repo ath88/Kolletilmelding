@@ -28,6 +28,7 @@ sub frontpage {
 sub day {
   my $self = shift;
   my $weekday = $self->stash('weekday');
+  $weekday = camelize($weekday);
   if ( !day_exists($weekday) ) {
     $log->warn("Day unknown '$weekday'");
     $self->session->{'error'} = "Unknown weekday";
@@ -39,7 +40,6 @@ sub day {
 
   my $data => get_day($weekday);
 
-  $weekday = camelize($weekday);
   $weekday =~ s/oe/&oslash;/;
 
   return $self->render ( dataset => $data, day => $weekday, title => $title);
