@@ -10,12 +10,12 @@ use DBI;
 
 my $dbh = DBI->connect('DBI:mysql:kolle', 'root', '') || die "Could not connect to database: $DBI::errstr";
 
-my $days = { monday    => 1, mandag  => 1,
-             tuesday   => 2, tirsdag => 2,
-             wednesday => 3, onsdag  => 3,
-             thursday  => 4, torsdag => 4,
-             friday    => 5, fredag  => 5,
-             saturday  => 6, loerdag => 6,
+my $days = { Monday    => 1, Mandag  => 1,
+             Tuesday   => 2, Tirsdag => 2,
+             Wednesday => 3, Onsdag  => 3,
+             Thursday  => 4, Torsdag => 4,
+             Friday    => 5, Fredag  => 5,
+             Saturday  => 6, Loerdag => 6,
 };
 
 # check if user exists, return result
