@@ -21,9 +21,10 @@ sub frontpage {
 
   my $data = get_days();
 
+  my $success;
   my $error = $self->session->{'error'};
   delete $self->session->{'error'};
-  return $self->render ( error => $error, dataset => $data, title => $title );
+  return $self->render ( _build_response($data, $error, $success) );
 }
 
 sub day {
@@ -39,11 +40,15 @@ sub day {
 
   $log->debug("Viewing day '$weekday'");
 
-  my $data => get_day($weekday);
+  my $data = get_day($weekday);
+
+
 
   $weekday =~ s/oe/&oslash;/;
 
-  return $self->render ( dataset => $data, day => $weekday, title => $title);
+  my $success;
+  my $error;
+  return $self->render ( day => $weekday, _build_response($data, $error, $success) );
 }
 
 sub postedit {
@@ -76,11 +81,25 @@ sub edit {
     return $self->redirect_to ('/');
   }
 
-
+  my $success;
 
   my $error = $self->session->{'error'};
   delete $self->session->{'error'};
-  return $self->render ( message => $key, error => $error, debug => dump($data), title => $title);
+  return $self->render ( _build_response($data, $error, $success) );
+}
+
+
+sub _build_response {
+  my ($debug, $error, $success) = @_;
+
+  my %response;
+  
+  $response{title}   = $title;
+  $response{error}   = $error;
+  $response{success} = $success;
+  $response{debug}   = dump( $debug ) if $debug;
+
+  return %response;
 }
 
 1;
