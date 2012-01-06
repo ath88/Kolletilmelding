@@ -85,12 +85,14 @@ sub update_user {
 sub create_user {
   my ($firstname, $lastname, $role, $clanname, $email) = @_;
 
-  my $random_string = random_string('c'x40);
+  # generate random string, and check if it already exists (really lucky if it does, though!)
+  my $random_string;
+  do { $random_string = random_string('c'x40) } while ( get_user( $random_string ) );
 
   #create empty user
   $dbh->do('
-    INSERT INTO user (firstname, lastname, role, clanname, email, userkey, day1, day2, day3, day4, day5, day6)
-    VALUES (?, ?, ?, ?, ?, ?, 0, 0, 0, 0, 0, 0)
+    INSERT INTO user (firstname, lastname, role, clanname, email, userkey)
+    VALUES (?, ?, ?, ?, ?, ?)
   ', undef, $firstname, $lastname, $role, $clanname, $email, $random_string);
 
   #send mail to user
