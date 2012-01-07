@@ -30,10 +30,12 @@ sub day_exists {
 }
 
 sub get_days {
-  return { name  => [ monday    => 'be late', 
-                      wednesday => undef, 
-                      friday    => undef ], 
-           name2 => [ friday    => undef ] };
+  my $result_ref = $dbh->selectall_arrayref('
+    SELECT firstname, lastname, clanname, day1, comment1, day2, comment2, day3, comment3, day4, comment4, day5, comment5, day6, comment6
+    FROM user
+  ');
+
+  return $result_ref;
 }
 
 sub get_day {
@@ -52,10 +54,6 @@ sub get_day {
   my $array_ref = $sth->fetchall_arrayref;
   
   return $array_ref;
-  
-
-  return { name  => 'be late', 
-           name2 => undef };
 }
 
 sub get_user {
