@@ -2,6 +2,7 @@ package Kolle::Model;
 
 use strict;
 use warnings;
+use utf8;
 
 use base 'Exporter';
 our @EXPORT = ('day_exists' ,'get_days', 'get_day', 'get_user', 'update_user', 'create_user');
@@ -12,6 +13,7 @@ use DBI;
 use Email::Sender::Simple qw(sendmail);
 use Email::Simple;
 use Email::Simple::Creator;
+use MIME::Entity;
   
 
 my $dbh = DBI->connect('DBI:mysql:kolle', 'root', '') || die "Could not connect to database: $DBI::errstr";
@@ -44,7 +46,7 @@ sub get_day {
   my $weekday = $days->{$day};
 
   my $sth = $dbh->prepare("
-    SELECT firstname, lastname, clanname 
+    SELECT firstname, lastname, clanname, comment$weekday 
     FROM user 
     WHERE day$weekday = 1
   ");
@@ -69,13 +71,13 @@ sub get_user {
 }
 
 sub update_user {
-  my ($key, $day1, $day2, $day3, $day4, $day5, $day6) = @_;
+  my ($key, $day1, $day2, $day3, $day4, $day5, $day6, $comment1, $comment2, $comment3, $comment4, $comment5, $comment6) = @_;
 
   $dbh->do('
     UPDATE user 
-    SET day1 = ?, day2 = ?, day3 = ?, day4 = ?, day5 = ?, day6 = ?
+    SET day1 = ?, day2 = ?, day3 = ?, day4 = ?, day5 = ?, day6 = ?, comment1 = ?, comment2 = ?, comment3 = ?, comment4 = ?, comment5 = ?, comment6 = ?
     WHERE userkey = ?
-  ',undef, $day1, $day2, $day3, $day4, $day5, $day6, $key);
+  ',undef, $day1, $day2, $day3, $day4, $day5, $day6, $comment1, $comment2, $comment3, $comment4, $comment5, $comment6, $key);
 
   return 1;
 }
@@ -98,9 +100,18 @@ sub create_user {
   #TODO remove default-adress
   $email = 'ath88@winters';
 
+#  my $mail = MIME::Entity->build(
+#    From    => '"Asbjoern" <senior@moelleaa.dk>',
+#    To      => "\"$firstname $lastname\" <$email>",
+#    Subject => "Tilmelding til Divisionskolleugen",
+#    Data    => ["Her er dit link:\n", "http://localhost/edit/$random_string"]
+#  );
+
+
   my $mail = Email::Simple->create(
     header => [
-      To      => "\"$firstname $lastname\" <$email>",
+#      To      => "\"$firstname $lastname\" <$email>",
+      To      => "<$email>",
       From    => '"Asbjoern" <senior@moelleaa.dk>',
       Subject => "Tilmelding til Divisionskolleugen",
     ],
