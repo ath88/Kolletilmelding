@@ -16,6 +16,7 @@ use Encode qw(encode);
   
 
 my $dbh = DBI->connect('DBI:mysql:kolle', 'root', '') || die "Could not connect to database: $DBI::errstr";
+$dbh->{'mysql_enable_utf8'} = 1;
 
 #TODO remove default-adress
 my $baseurl = 'http://localhost/edit/';
