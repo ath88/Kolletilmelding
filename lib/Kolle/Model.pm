@@ -11,12 +11,14 @@ use String::Random qw(random_string);
 use DBI;
 
 use Email::Sender::Simple qw(sendmail);
-use Email::Simple;
-use Email::Simple::Creator;
 use MIME::Entity;
+use Encode qw(encode);
   
 
 my $dbh = DBI->connect('DBI:mysql:kolle', 'root', '') || die "Could not connect to database: $DBI::errstr";
+
+#TODO remove default-adress
+my $baseurl = 'http://localhost/edit/';
 
 my $days = { Monday    => 1, Mandag  => 1,
              Tuesday   => 2, Tirsdag => 2,
@@ -96,26 +98,19 @@ sub create_user {
   ', undef, $firstname, $lastname, $role, $clanname, $email, $random_string);
 
   #send mail to user
-
-  #TODO remove default-adress
   $email = 'ath88@winters';
 
-#  my $mail = MIME::Entity->build(
-#    From    => '"Asbjoern" <senior@moelleaa.dk>',
-#    To      => "\"$firstname $lastname\" <$email>",
-#    Subject => "Tilmelding til Divisionskolleugen",
-#    Data    => ["Her er dit link:\n", "http://localhost/edit/$random_string"]
-#  );
+  my $body = 
+"Hej $firstname $lastname,\n\nDu er tilmeldt Mølleå Divisions Seniorkolleuge 2012. For at du kan deltage i bespisningen skal du fortælle hvornår du gerne vil spise med. Benyt derfor dette link til at tilmelde dig, og rette din tilmelding.\n\n$baseurl$random_string\n\nHvis du ikke er $firstname $lastname, så svar venligst på mailen, så vi kan fejlfinde på problemet.\n\nMed venlig hilsen\nMølleå Divisions Seniorkolleugeudvalg";
 
-
-  my $mail = Email::Simple->create(
-    header => [
-#      To      => "\"$firstname $lastname\" <$email>",
-      To      => "<$email>",
-      From    => '"Asbjoern" <senior@moelleaa.dk>',
-      Subject => "Tilmelding til Divisionskolleugen",
-    ],
-    body => "Her er dit link:\n http://localhost/edit/$random_string",
+  my $mail = MIME::Entity->build(
+    Type    => 'text/plain',
+    Charset => "UTF-8",
+    Encoding => 'quoted-printable',
+    From    => encode('MIME-Header','Asbjørn <senior@moelleaa.dk>'),
+    To      => encode('MIME-Header',"$firstname $lastname <$email>"),
+    Subject => encode('MIME-Header',"Tilmelding til Divisionskolleugen"),
+    Data    => encode('UTF-8',$body),
   );
 
   sendmail($mail);
