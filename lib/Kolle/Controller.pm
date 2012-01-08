@@ -2,17 +2,23 @@ package Kolle::Controller;
 
 use strict;
 use warnings;
+use utf8;
 
 use Mojo::Base 'Mojolicious::Controller';
 use Kolle::Model;
 use Mojo::Log;
 
+use Data::Dumper qw(Dumper);
+$Data::Dumper::Useperl = 1; # For proper dump of UTF-8 characters
 use Data::Dump qw(dump);
+use HTML::Entities qw(encode_entities);
 use String::CamelCase qw(camelize);
 
 my $log = Mojo::Log->new; 
 
 my $title = "M&oslash;lle&aring; divisions seniorkolleuge";
+
+my $debugmode = 1;
 
 sub frontpage {
   $log->debug("Viewing frontpage");
@@ -42,13 +48,11 @@ sub day {
 
   my $data = get_day($weekday);
 
-
-
-  $weekday =~ s/oe/&oslash;/;
+  $weekday =~ s/oe/ø/;
 
   my $success;
   my $error;
-  return $self->render ( day => $weekday, _build_response($data, $error, $success) );
+  return $self->render ( _build_response($data, $error, $success, {day => $weekday} ) );
 }
 
 sub postedit {
@@ -90,16 +94,24 @@ sub edit {
 
 
 sub _build_response {
-  my ($debug, $error, $success) = @_;
+  my ($debug, $error, $success, $custom_ref) = @_;
 
   my %response;
   
   $response{title}   = $title;
   $response{error}   = $error;
   $response{success} = $success;
-  $response{debug}   = dump( $debug ) if $debug;
+  $response{debug}   = Dumper( $debug )  if $debugmode;
 
-  return %response;
+  return %response unless defined $custom_ref;
+
+  my %custom = %{$custom_ref};
+
+  foreach my $key (keys %custom) {
+    $custom{$key} = encode_entities( $custom{$key} );
+  }
+
+  return (%response, %custom);
 }
 
 1;
