@@ -92,26 +92,47 @@ sub edit {
   return $self->render ( _build_response($data, $error, $success) );
 }
 
+###### non-route subroutines ######
 
 sub _build_response {
-  my ($debug, $error, $success, $custom_ref) = @_;
+  my ($data, $error, $success, $custom_ref) = @_;
 
   my %response;
+  
+  my $encoded_data = encode_struct( $data );
   
   $response{title}   = $title;
   $response{error}   = $error;
   $response{success} = $success;
-  $response{debug}   = Dumper( $debug )  if $debugmode;
+  $response{cont}    = $encoded_data;
+  $response{debug}   = Dumper( $encoded_data )  if $debugmode;
 
   return %response unless defined $custom_ref;
 
   my %custom = %{$custom_ref};
 
   foreach my $key (keys %custom) {
-    $custom{$key} = encode_entities( $custom{$key} );
+    $custom{$key} = encode_struct( $custom{$key} );
   }
 
   return (%response, %custom);
+}
+
+sub encode_struct {
+  my $struct = shift;
+  my $result;
+
+  if ( ref( $struct ) eq '') {
+    $result = encode_entities( $struct );
+  } 
+  elsif ( ref( $struct ) eq 'ARRAY' ) {
+    push( @{$result}, encode_struct( $_ ) ) for @{$struct} ;
+  } 
+  elsif ( ref( $struct ) eq 'HASH' ) {
+    ${$result}{$_} = encode_struct( ${$struct}{$_} ) for keys %$struct;
+  } 
+  
+  return $result;
 }
 
 1;
