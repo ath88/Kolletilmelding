@@ -2,5 +2,24 @@
 
   <h2>[% day %]</h2>
 
+  <table border=1 width='100%'>
+    <tr>
+      <td class='name_header'>
+        <span class='header'>Navn</span>
+      </td>
+      <td class='comment'>
+        <span class='header'>Kommentar</span>
+      </td>
+    </tr>
+
+    [% FOREACH user IN cont %]
+    <tr>
+      <td>[% user.0 %] [% user.1 %]</td>
+      <td>[% user.3 %]</td>
+    </tr>
+    [% END %]
+  </table>
+
+
 [% END %]
 

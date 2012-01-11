@@ -37,6 +37,10 @@ span.error {
   color: red;
 }
 
+span.header {
+  font-weight:bold;
+}
+
 td.bool {
   text-indent: 24px;
 }
@@ -44,6 +48,10 @@ td.bool {
 td.weekday {
   width: 55px;
   text-align: center;
+}
+
+td.comment {
+  width: 400;
 }
 
 a.comment_star {
