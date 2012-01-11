@@ -1,11 +1,13 @@
-<span class="success">
-  [% success %]
-</span>
-<span class="error">
-  [% error %]
-</span>
-<span class="debug">
-  [% debug %]
-</span>
+<div class="message">
+  <span class="success">
+    [% success %]
+  </span>
+  <span class="error">
+    [% error %]
+  </span>
+  <span class="debug">
+    [% debug %]
+  </span>
+</div>
 
 

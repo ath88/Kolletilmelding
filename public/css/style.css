@@ -10,13 +10,13 @@ div.frame {
   margin-left: auto;
   margin-right: auto;
   height: auto;
-  width: 500px;
+  width: 540px;
   padding-bottom: 25px;
   padding-top: 5px;
 }
 
 div.message {
-  height: 50px;
+  height: 100px;
 }
 
 a {
@@ -37,42 +37,19 @@ span.error {
   color: red;
 }
 
-input.names {
-  width: 180px;
+td.bool {
+  text-indent: 24px;
 }
 
-div.data {
-  width: 492px;
-  padding:3px;
-  margin:0px;
-  margin-bottom:3px;
-  background: #e5eecc;
-  border:solid 1px #c3c3c3;
-}
-
-div.user {
-  width: 492px;
-  padding:3px;
-  margin:0px;
-  margin-bottom:10px;
-  background: #e5eecc;
-  border:solid 1px #c3c3c3;
-}
-
-div.team_header {
-  width: 492px;
-  padding:3px;
-  margin:0px;
-  background: #e5eecc;
-  border:solid 1px #c3c3c3;
+td.weekday {
+  width: 55px;
   text-align: center;
 }
 
-div.team {
-  width: 478px;
-  padding: 10px;
-  margin: 0px;
-  background: #e5eecc;
-  border:solid 1px #c3c3c3;
-  display: none;
+a.comment_star {
+  color: red;
+}
+
+a.comment_star:hover {
+  background-color: #333;
 }

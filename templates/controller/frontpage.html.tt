@@ -4,26 +4,37 @@
     <tr>
       <td>
       </td>
-      <td>
+      <td class='weekday'>
         <a href='day/mandag'>Mandag</a>
       </td>
-      <td>
-  <a href='day/tirsdag'>Tirsdag</a>
+      <td class='weekday'>
+        <a href='day/tirsdag'>Tirsdag</a>
       </td>
-      <td>
-  <a href='day/onsdag'>Onsdag</a>
+      <td class='weekday'>
+        <a href='day/onsdag'>Onsdag</a>
       </td>
-      <td>
-  <a href='day/torsdag'>Torsdag</a>
+      <td class='weekday'>
+        <a href='day/torsdag'>Torsdag</a>
       </td>
-      <td>
-  <a href='day/fredag'>Fredag</a>
+      <td class='weekday'>
+        <a href='day/fredag'>Fredag</a>
       </td>
-      <td>
-  <a href='day/loerdag'>L&oslash;rdag</a>
+      <td class='weekday'>
+        <a href='day/loerdag'>L&oslash;rdag</a>
       </td>
     </tr>
 
-  
+    [% FOREACH user IN cont %]
+    <tr>
+      <td>[% user.0 %] [% user.1 %]</td>
+      <td class='bool'>[% IF user.3  %]X[% END %][% IF user.4   %]<a class='comment_star' title='[% user.4  %]'>*</a>[% END %]</td>
+      <td class='bool'>[% IF user.5  %]X[% END %][% IF user.6   %]<a class='comment_star' title='[% user.6  %]'>*</a>[% END %]</td>
+      <td class='bool'>[% IF user.7  %]X[% END %][% IF user.8   %]<a class='comment_star' title='[% user.8  %]'>*</a>[% END %]</td>
+      <td class='bool'>[% IF user.9  %]X[% END %][% IF user.10  %]<a class='comment_star' title='[% user.10 %]'>*</a>[% END %]</td>
+      <td class='bool'>[% IF user.11 %]X[% END %][% IF user.12  %]<a class='comment_star' title='[% user.12 %]'>*</a>[% END %]</td>
+      <td class='bool'>[% IF user.13 %]X[% END %][% IF user.14  %]<a class='comment_star' title='[% user.14 %]'>*</a>[% END %]</td>
+    </tr>
+    [% END %]
   </table>
+
 [% END %]
