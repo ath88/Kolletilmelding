@@ -2,9 +2,142 @@
 
   <h2>[% message %]</h2>
 
-  <form name="input" action="1" method="post">
+  <form name="input" action="[% cont.userkey %]" method="post">
+
+  <table border='1' width='100%'>
+    <tr>
+      <td>
+        <span class='header'>Dag:</span>
+      </td>
+      <td class='edit_weekday'>
+        <span class='header'>Mandag</span>
+      </td>
+      <td class='edit_weekday'>
+        <span class='header'>Tirsdag</span>
+      </td>
+      <td class='edit_weekday'>
+        <span class='header'>Onsdag</span>
+      </td>
+      <td class='edit_weekday'>
+        <span class='header'>Torsdag</span>
+      </td>
+      <td class='edit_weekday'>
+        <span class='header'>Fredag</span>
+      </td>
+      <td class='edit_weekday'>
+        <span class='header'>L&oslash;rdag</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Spiser med:
+      </td>
+      <td class='center'>
+        <input type='checkbox' [% IF cont.day1 %]checked[% END %] name='day1'>
+      </td>
+      <td class='center'>
+        <input type='checkbox' [% IF cont.day2 %]checked[% END %] name='day2'>
+      </td>
+      <td class='center'>
+        <input type='checkbox' [% IF cont.day3 %]checked[% END %] name='day3'>
+      </td>
+      <td class='center'>
+        <input type='checkbox' [% IF cont.day4 %]checked[% END %] name='day4'>
+      </td>
+      <td class='center'>
+        <input type='checkbox' [% IF cont.day5 %]checked[% END %] name='day5'>
+      </td>
+      <td class='center'>
+        <input type='checkbox' [% IF cont.day6 %]checked[% END %] name='day6'>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Kommentar:
+      </td>
+      <td class='center'>
+        <a onclick='$("div.comment").slideUp("slow");$("#comment1").slideToggle("slow");'>
+          [% IF cont.comment1 %]Ret[% ELSE %]Tilf&oslash;j[% END %]
+        </a>
+      </td>
+      <td class='center'>
+        <a onclick='$("div.comment").slideUp("slow");$("#comment2").slideToggle("slow");'>
+          [% IF cont.comment2 %]Ret[% ELSE %]Tilf&oslash;j[% END %]
+        </a>
+      </td>
+      <td class='center'>
+        <a onclick='$("div.comment").slideUp("slow");$("#comment3").slideToggle("slow");'>
+          [% IF cont.comment3 %]Ret[% ELSE %]Tilf&oslash;j[% END %]
+        </a>
+      </td>
+      <td class='center'>
+        <a onclick='$("div.comment").slideUp("slow");$("#comment4").slideToggle("slow");'>
+          [% IF cont.comment4 %]Ret[% ELSE %]Tilf&oslash;j[% END %]
+        </a>
+      </td>
+      <td class='center'>
+        <a onclick='$("div.comment").slideUp("slow");$("#comment5").slideToggle("slow");'>
+          [% IF cont.comment5 %]Ret[% ELSE %]Tilf&oslash;j[% END %]
+        </a>
+      </td>
+      <td class='center'>
+        <a onclick='$("div.comment").slideUp("slow");$("#comment6").slideToggle("slow");'>
+          [% IF cont.comment6 %]Ret[% ELSE %]Tilf&oslash;j[% END %]
+        </a>
+      </td>
+    </tr>
+  </table>
+
+  <div class='comment' id='comment1'>
+    <hr />
+    <span class='header'>Kommentar til Mandag</span><p>
+    <input name='comment1' type='text' size='83' maxlength='500' value='[% cont.comment1 %]'>
+    <a onclick='document.input.comment1.value="";$("#comment1").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment1").slideToggle("slow");'>Luk</a>
+    <hr />
+  </div>
+  <div class='comment' id='comment2'>
+    <hr />
+    <span class='header'>Kommentar til Tirsdag</span><p>
+    <input name='comment2' type='text' size='83' maxlength='500' value='[% cont.comment2 %]'>
+    <a onclick='document.input.comment2.value="";$("#comment2").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment2").slideToggle("slow");'>Luk</a>
+    <hr />
+  </div>
+  <div class='comment' id='comment3'>
+    <hr />
+    <span class='header'>Kommentar til Onsdag</span><p>
+    <input name='comment3' type='text' size='83' maxlength='500' value='[% cont.comment3 %]'>
+    <a onclick='document.input.comment3.value="";$("#comment3").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment3").slideToggle("slow");'>Luk</a>
+    <hr />
+  </div>
+  <div class='comment' id='comment4'>
+    <hr />
+    <span class='header'>Kommentar til Torsdag</span><p>
+    <input name='comment4' type='text' size='83' maxlength='500' value='[% cont.comment4 %]'>
+    <a onclick='document.input.comment4.value="";$("#comment4").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment4").slideToggle("slow");'>Luk</a>
+    <hr />
+  </div>
+  <div class='comment' id='comment5'>
+    <hr />
+    <span class='header'>Kommentar til Fredag</span><p>
+    <input name='comment5' type='text' size='83' maxlength='500' value='[% cont.comment5 %]'>
+    <a onclick='document.input.comment5.value="";$("#comment5").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment5").slideToggle("slow");'>Luk</a>
+    <hr />
+  </div>
+  <div class='comment' id='comment6'>
+    <hr />
+    <span class='header'>Kommentar til L&oslash;rdag</span><p>
+    <input name='comment6' type='text' size='83' maxlength='500' value='[% cont.comment6 %]'>
+    <a onclick='document.input.comment6.value="";$("#comment6").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment6").slideToggle("slow");'>Luk</a>
+    <hr />
+  </div>
+
+  
+
     <input type="submit" value="Submit" />
   </form>
+
+  
+
 
   edit
 

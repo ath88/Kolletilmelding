@@ -19,6 +19,10 @@ div.message {
   height: 100px;
 }
 
+div.comment {
+  display: none;
+}
+
 a {
   color: #03c
 }
@@ -45,8 +49,17 @@ td.bool {
   text-indent: 24px;
 }
 
+td.center {
+  text-align: center;
+}
+
 td.weekday {
   width: 55px;
+  text-align: center;
+}
+
+td.edit_weekday {
+  width: 68px;
   text-align: center;
 }
 
