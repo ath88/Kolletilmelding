@@ -8,17 +8,24 @@ use Mojo::Base 'Mojolicious::Controller';
 use Kolle::Model;
 use Mojo::Log;
 
-use Data::Dumper qw(Dumper);
-$Data::Dumper::Useperl = 1; # For proper dump of UTF-8 characters
-use Data::Dump qw(dump);
 use HTML::Entities qw(encode_entities);
 use String::CamelCase qw(camelize);
+use Data::Dumper qw(Dumper);
+$Data::Dumper::Useperl = 1; # For proper dump of UTF-8 characters
 
 my $log = Mojo::Log->new; 
 
 my $title = "M&oslash;lle&aring; divisions seniorkolleuge";
 
-my $debugmode = 1;
+my $debugmode = 0;
+
+my $app = new Mojolicious;
+$log->debug("MOJO_MODE is @{ [ $app->mode ] }");
+
+$debugmode = 1 if ($app->mode eq 'development');
+
+
+
 
 sub frontpage {
   $log->debug("Viewing frontpage");
