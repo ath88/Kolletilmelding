@@ -1,8 +1,13 @@
 [% WRAPPER layout.tt %]
 
-  <table border=1 width='100%'>
-    <tr>
-      <td>
+  <center>
+    <h1>M&oslash;lle&aring; Divisions Seniorkolleuge</h1>
+    <p>Her kan du se hvem der er tilmeldte hvilke dage.<br>Tryk på en dag for at se flere detaljer.<br>Hold musen over en stjerne for at se kommentaren.</p>
+
+  <table border='0' width='100%'>
+    <tr class='header'>
+      <td class='header'>
+        <span class='header'>Navn:</span>
       </td>
       <td class='weekday'>
         <a href='day/mandag'>Mandag</a>
@@ -24,8 +29,10 @@
       </td>
     </tr>
 
+    [% SET count = 0 %]
     [% FOREACH user IN cont %]
-    <tr>
+    [% count = (count + 1) mod 2 %]
+    <tr [% IF count == 0 %]class='header'[% END %]>
       <td>[% user.0 %] [% user.1 %]</td>
       <td class='bool'>[% IF user.3  %]X[% END %][% IF user.4   %]<a class='comment_star' title='[% user.4  %]'>*</a>[% END %]</td>
       <td class='bool'>[% IF user.5  %]X[% END %][% IF user.6   %]<a class='comment_star' title='[% user.6  %]'>*</a>[% END %]</td>

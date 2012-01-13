@@ -59,7 +59,7 @@ sub day {
 
   my $success;
   my $error;
-  return $self->render ( _build_response($data, $error, $success, {day => $weekday} ) );
+  return $self->render ( _build_response($data, $error, $success, {day => $weekday, total => ($#{$data}+1)} ) );
 }
 
 sub postedit {

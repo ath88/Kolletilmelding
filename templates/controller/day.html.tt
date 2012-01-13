@@ -1,9 +1,14 @@
 [% WRAPPER layout.tt %]
 
-  <h2>[% day %]</h2>
+  <center>
+    <h1>- [% day %] -</h1>
+    <h2 class='focus'>[% total %] tilmeldte</h2>
+    <p>Her kan du se hvem der er tilmeldt, og om de har kommentarer til dagen.<br>
+       Dem med kommentarer, men uden tilmeldning, ses nederst.</p>
+  
 
-  <table border=1 width='100%'>
-    <tr>
+  <table border='0' width='100%'>
+    <tr class='header'>
       <td class='name_header'>
         <span class='header'>Navn</span>
       </td>
@@ -12,8 +17,10 @@
       </td>
     </tr>
 
+    [% SET count = 0 %]
     [% FOREACH user IN cont %]
-    <tr>
+    [% count = (count + 1) mod 2 %]
+    <tr [% IF count == 0 %]class='header'[% END %]>
       <td>[% user.0 %] [% user.1 %]</td>
       <td>[% user.3 %]</td>
     </tr>

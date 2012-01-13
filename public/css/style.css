@@ -1,8 +1,8 @@
 body {
-  background-color: #ddd;
+  background-color: #073642;
   font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
   font-size: 13px;
-  color: #333;
+  color: #93a1a1;
 }
 
 div.frame {
@@ -16,21 +16,35 @@ div.frame {
 }
 
 div.message {
-  height: 100px;
+  height: 60px;
 }
 
 div.comment {
+  height: 67px;
   display: none;
 }
 
+div.commentspace {
+  height: 75px;
+}
+
 a {
-  color: #03c
+  color: #2aa198;
 }
 
 a:hover {
   background-color: #03c;
   color: white;
   text-decoration: none;
+}
+
+a.comment_star {
+  color: #dc322f;
+  font-weight: bold;
+}
+
+a.comment_star:hover {
+  background-color: #dc322f;
 }
 
 span.success {
@@ -43,6 +57,10 @@ span.error {
 
 span.header {
   font-weight:bold;
+}
+
+tr.header {
+  background-color: #002b36;
 }
 
 td.bool {
@@ -67,10 +85,10 @@ td.comment {
   width: 400;
 }
 
-a.comment_star {
-  color: red;
+input {
+  background-color: #eee8d5;
 }
 
-a.comment_star:hover {
-  background-color: #333;
+h2.focus {
+  color: #cb4b16;
 }

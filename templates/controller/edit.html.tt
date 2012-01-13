@@ -1,12 +1,21 @@
 [% WRAPPER layout.tt %]
 
-  <h2>[% message %]</h2>
+  <center>
+  <h1>[% cont.firstname %] [% cont.lastname %]</h1>
+  <h2>
+    [% IF cont.role == 2 %]Klanspejder,[% END %]
+    [% IF cont.role == 1 %]Klanleder,[% END %]
+    [% IF cont.role == 0 %]SuperKlanleder,[% END %]
+    [% cont.clanname %]
+  </h21>
 
-  <form name="input" action="[% cont.userkey %]" method="post">
 
-  <table border='1' width='100%'>
-    <tr>
-      <td>
+  </center>
+
+  <form name="input" action="[% cont.contkey %]" method="post">
+  <table border='0' width='100%'>
+    <tr class='header'>
+      <td class='edit_header'>
         <span class='header'>Dag:</span>
       </td>
       <td class='edit_weekday'>
@@ -29,7 +38,7 @@
       </td>
     </tr>
     <tr>
-      <td>
+      <td class='edit_first'>
         Spiser med:
       </td>
       <td class='center'>
@@ -51,8 +60,8 @@
         <input type='checkbox' [% IF cont.day6 %]checked[% END %] name='day6'>
       </td>
     </tr>
-    <tr>
-      <td>
+    <tr class='header'>
+      <td class='edit_first'>
         Kommentar:
       </td>
       <td class='center'>
@@ -88,57 +97,90 @@
     </tr>
   </table>
 
-  <div class='comment' id='comment1'>
+  <div class='commentspace'>
     <hr />
+  <div class='comment' id='comment1'>
     <span class='header'>Kommentar til Mandag</span><p>
     <input name='comment1' type='text' size='83' maxlength='500' value='[% cont.comment1 %]'>
     <a onclick='document.input.comment1.value="";$("#comment1").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment1").slideToggle("slow");'>Luk</a>
-    <hr />
   </div>
   <div class='comment' id='comment2'>
-    <hr />
     <span class='header'>Kommentar til Tirsdag</span><p>
     <input name='comment2' type='text' size='83' maxlength='500' value='[% cont.comment2 %]'>
     <a onclick='document.input.comment2.value="";$("#comment2").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment2").slideToggle("slow");'>Luk</a>
-    <hr />
   </div>
   <div class='comment' id='comment3'>
-    <hr />
     <span class='header'>Kommentar til Onsdag</span><p>
     <input name='comment3' type='text' size='83' maxlength='500' value='[% cont.comment3 %]'>
     <a onclick='document.input.comment3.value="";$("#comment3").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment3").slideToggle("slow");'>Luk</a>
-    <hr />
   </div>
   <div class='comment' id='comment4'>
-    <hr />
     <span class='header'>Kommentar til Torsdag</span><p>
     <input name='comment4' type='text' size='83' maxlength='500' value='[% cont.comment4 %]'>
     <a onclick='document.input.comment4.value="";$("#comment4").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment4").slideToggle("slow");'>Luk</a>
-    <hr />
   </div>
   <div class='comment' id='comment5'>
-    <hr />
     <span class='header'>Kommentar til Fredag</span><p>
     <input name='comment5' type='text' size='83' maxlength='500' value='[% cont.comment5 %]'>
     <a onclick='document.input.comment5.value="";$("#comment5").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment5").slideToggle("slow");'>Luk</a>
-    <hr />
   </div>
   <div class='comment' id='comment6'>
-    <hr />
     <span class='header'>Kommentar til L&oslash;rdag</span><p>
     <input name='comment6' type='text' size='83' maxlength='500' value='[% cont.comment6 %]'>
     <a onclick='document.input.comment6.value="";$("#comment6").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment6").slideToggle("slow");'>Luk</a>
+  </div>
     <hr />
   </div>
-
   
-
-    <input type="submit" value="Submit" />
-  </form>
-
+  <br>
+  <table>
+    <tr>
+      <td>
+        Fornavn:
+      </td>
+      <td>
+        <input type='text' value='[% cont.firstname %]'><br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Efternavn:
+      </td>
+      <td>
+        <input type='text' value='[% cont.lastname %]'><br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Telefon:
+      </td>
+      <td>
+        <input type='text' value='[% cont.phone %]'><br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        E-mail:
+      </td>
+      <td>
+        <input type='text' value='[% cont.email %]'><br>
+      </td>
+    </tr>
+  </table>
   
+  <br>
+  <input type='checkbox'> Ja, Bogger må godt bruge mine data herfra til videre kontakt.<br>
+  <br>
+
+  <input type="submit" value="Submit" />
+
+[% IF cont.role < 2 %]
+
+  <hr />
+  <p class='heading'>Invitér klanmedlem</p>
+
+[% END %]
 
 
-  edit
 
 [% END %]
