@@ -139,7 +139,7 @@
         Fornavn:
       </td>
       <td>
-        <input type='text' value='[% cont.firstname %]'><br>
+        <input type='text' name='firstname' value='[% cont.firstname %]'><br>
       </td>
     </tr>
     <tr>
@@ -147,7 +147,7 @@
         Efternavn:
       </td>
       <td>
-        <input type='text' value='[% cont.lastname %]'><br>
+        <input type='text' name='lastname' value='[% cont.lastname %]'><br>
       </td>
     </tr>
     <tr>
@@ -155,7 +155,7 @@
         Telefon:
       </td>
       <td>
-        <input type='text' value='[% cont.phone %]'><br>
+        <input type='text' name='phone' value='[% cont.phone %]'><br>
       </td>
     </tr>
     <tr>
@@ -163,7 +163,7 @@
         E-mail:
       </td>
       <td>
-        <input type='text' value='[% cont.email %]'><br>
+        <input type='text' name='email' value='[% cont.email %]'><br>
       </td>
     </tr>
   </table>

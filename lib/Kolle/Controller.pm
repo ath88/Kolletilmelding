@@ -5,8 +5,8 @@ use warnings;
 use utf8;
 
 use Mojo::Base 'Mojolicious::Controller';
-use Kolle::Model;
 use Mojo::Log;
+use Kolle::Model;
 
 use HTML::Entities qw(encode_entities);
 use String::CamelCase qw(camelize);
@@ -14,17 +14,12 @@ use Data::Dumper qw(Dumper);
 $Data::Dumper::Useperl = 1; # For proper dump of UTF-8 characters
 
 my $log = Mojo::Log->new; 
-
+my $app = new Mojolicious;
 my $title = "M&oslash;lle&aring; divisions seniorkolleuge";
-
 my $debugmode = 0;
 
-my $app = new Mojolicious;
 $log->debug("MOJO_MODE is @{ [ $app->mode ] }");
-
 $debugmode = 1 if ($app->mode eq 'development');
-
-
 
 
 sub frontpage {
@@ -75,9 +70,17 @@ sub postedit {
 
   my $postdata;
   #update_user($user_iden, $postdata);
+ 
+
+  $log->debug(Dumper($self->req->param('firstname')));
+ 
+  my $error;
+  my $success;
+  
+  my $data = get_user($key);
   
 
-  return edit ( $self, $postdata);
+  return $self->render ( template => 'controller/edit', _build_response($data, $error, $success) );
 }
 
 sub edit {
