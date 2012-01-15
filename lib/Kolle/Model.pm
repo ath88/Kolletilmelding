@@ -13,10 +13,16 @@ use DBI;
 use Email::Sender::Simple qw(sendmail);
 use MIME::Entity;
 use Encode qw(encode);
+use POSIX;
+
+use Mojo::Base qw(Mojolicious);
+
+my $app = new Mojolicious;
   
 
 my $dbh = DBI->connect('DBI:mysql:kolle', 'root', '') || die "Could not connect to database: $DBI::errstr";
 $dbh->{'mysql_enable_utf8'} = 1;
+$dbh->{'mysql_auto_reconnect'} = 1;
 
 #TODO remove default-adress
 my $baseurl = 'http://localhost/edit/';
@@ -99,7 +105,7 @@ sub create_user {
   ', undef, $firstname, $lastname, $role, $clanname, $email, $random_string);
 
   #send mail to user
-  $email = 'ath88@winters';
+  $email = getlogin() . '@localhost' unless $app->mode eq 'production';
 
   my $body = 
 "Hej $firstname $lastname,\n\nDu er tilmeldt Mølleå Divisions Seniorkolleuge 2012. For at du kan deltage i bespisningen skal du fortælle hvornår du gerne vil spise med. Benyt derfor dette link til at tilmelde dig, og rette din tilmelding.\n\n$baseurl$random_string\n\nHvis du ikke er $firstname $lastname, så svar venligst på mailen, så vi kan fejlfinde på problemet.\n\nMed venlig hilsen\nMølleå Divisions Seniorkolleugeudvalg";
