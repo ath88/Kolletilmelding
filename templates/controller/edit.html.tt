@@ -135,7 +135,7 @@
   <br>
   <table>
     <tr>
-      <td>
+      <td width='150px'>
         Fornavn:
       </td>
       <td>
@@ -172,12 +172,53 @@
   <input type='checkbox'> Ja, Bogger må godt bruge mine data herfra til videre kontakt.<br>
   <br>
 
-  <input type="submit" value="Submit" />
+  <input type="submit" value="Send" />
+  </form>
 
 [% IF cont.role < 2 %]
 
   <hr />
-  <p class='heading'>Invitér klanmedlem</p>
+  <p class='heading'><a onclick='$("#invite").slideToggle("slow");' >Invitér klanmedlem</a></p>
+  
+  <div id='invite' class='invite'>
+  <form name="new" action="[% cont.contkey %]" method="post">
+  <table width='100%'>
+    <tr>
+      <td width='150px'>
+        Klannavn:
+      </td>
+      <td>
+        <input type='text name='clanname' value='[% cont.clanname %]' [% IF cont.role != 0 %]disabled[% END %]>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Fornavn:
+      </td>
+      <td>
+        <input type='text name='clanname' value=''>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Efternavn:
+      </td>
+      <td>
+        <input type='text name='clanname' value=''>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        E-mail:
+      </td>
+      <td>
+        <input type='text name='clanname' value=''>
+      </td>
+    </tr>
+  </table>
+  <input type="submit" value="Opret" />
+  </div>
+
 
 [% END %]
 
