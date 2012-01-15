@@ -40,14 +40,14 @@ $t->get_ok('/edit/nonexisting', 'get nonexisting' )->status_is('302'); #->conten
 ok( !get_user('togga') );
 ok( !get_user('bogussa') );
 
-my $key1 = create_user('Mikkel', 'Rank',            '1','Klan X','blah@aths.dk');
-my $key2 = create_user('Louise', 'Jacobsen',        '1','Klan X','blah@aths.dk');
-my $key3 = create_user('Laura',  'Katrine Engbaek', '1','Klan X','blah@aths.dk'); 
-my $key4 = create_user("Asbjørn",'Thegler',         '1','Klan X','blah@aths.dk');
-my $key5 = create_user('Jeppe',  'Justesen',        '1','Klan X','blah@aths.dk');
-my $key6 = create_user('Line',   'Efternavn',       '2','Klan X','blah@aths.dk');
-my $key7 = create_user('Hans',   'Efternavn',       '2','Klan X','blah@aths.dk');
-my $key8 = create_user('Peter',  'Efternavn',       '2','Klan X','blah@aths.dk');
+my $key1 = create_user('Mikkel',   'Rank',            '1','Tuliklan',  'blah@aths.dk');
+my $key2 = create_user('Louise',   'Jacobsen',        '1','Skråklan', 'blah@aths.dk');
+my $key3 = create_user('Laura',    'Katrine Engbaek', '2','Klan 2½',  'blah@aths.dk'); 
+my $key4 = create_user("Asbjørn",  'Thegler',         '0','Klan 2½',  'blah@aths.dk');
+my $key5 = create_user('Jeppe',    'Justesen',        '1','Bonanza',  'blah@aths.dk');
+my $key6 = create_user('Frederik', 'Klein-Nielsen',   '2','Skråklan', 'blah@aths.dk');
+my $key7 = create_user('Hans',     'Efternavn',       '2','Klan X',   'blah@aths.dk');
+my $key8 = create_user('Peter',    'Efternavn',       '2','Klan X',   'blah@aths.dk');
 
 ok( get_user($key1) );
 
