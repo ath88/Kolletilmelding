@@ -13,6 +13,7 @@
   </center>
 
   <form name="input" action="[% cont.contkey %]" method="post">
+  <input type='hidden' name='type' value='input'>
   <table border='0' width='100%'>
     <tr class='header'>
       <td class='edit_header'>
@@ -139,7 +140,7 @@
         Fornavn:
       </td>
       <td>
-        <input type='text' name='firstname' value='[% cont.firstname %]'><br>
+        <input type='text' name='firstname' value='[% cont.firstname %]'>
       </td>
     </tr>
     <tr>
@@ -147,7 +148,7 @@
         Efternavn:
       </td>
       <td>
-        <input type='text' name='lastname' value='[% cont.lastname %]'><br>
+        <input type='text' name='lastname' value='[% cont.lastname %]'>
       </td>
     </tr>
     <tr>
@@ -155,7 +156,7 @@
         Telefon:
       </td>
       <td>
-        <input type='text' name='phone' value='[% cont.phone %]'><br>
+        <input type='text' name='phone' value='[% cont.phone %]'>
       </td>
     </tr>
     <tr>
@@ -163,7 +164,7 @@
         E-mail:
       </td>
       <td>
-        <input type='text' name='email' value='[% cont.email %]'><br>
+        <input type='text' name='email' value='[% cont.email %]'>
       </td>
     </tr>
   </table>
@@ -182,13 +183,22 @@
   
   <div id='invite' class='invite'>
   <form name="new" action="[% cont.contkey %]" method="post">
+  <input type='hidden' name='type' value='new'>
   <table width='100%'>
     <tr>
       <td width='150px'>
         Klannavn:
       </td>
+      <td width='168px'>
+        [% IF cont.new_clanname %]
+          [% clanname = cont.new_clanname %]
+        [% ELSE %]
+          [% clanname = cont.clanname %]
+        [% END %]
+        <input type='text' name='clanname' value='[% clanname %]' [% IF cont.role != 0 %]readonly[% END %]>*
+      </td>
       <td>
-        <input type='text name='clanname' value='[% cont.clanname %]' [% IF cont.role != 0 %]disabled[% END %]>
+        <span class='error'>[% cont.new_clanname_error %]</span>
       </td>
     </tr>
     <tr>
@@ -196,7 +206,10 @@
         Fornavn:
       </td>
       <td>
-        <input type='text name='clanname' value=''>
+        <input type='text' name='firstname' value='[% cont.new_firstname %]'>*
+      </td>
+      <td>
+        <span class='error'>[% cont.new_firstname_error %]</span>
       </td>
     </tr>
     <tr>
@@ -204,7 +217,10 @@
         Efternavn:
       </td>
       <td>
-        <input type='text name='clanname' value=''>
+        <input type='text' name='lastname' value='[% cont.new_lastname %]'>
+      </td>
+      <td>
+        <span class='error'>[% cont.new_lastname_error %]</span>
       </td>
     </tr>
     <tr>
@@ -212,7 +228,10 @@
         E-mail:
       </td>
       <td>
-        <input type='text name='clanname' value=''>
+        <input type='text' name='email' value='[% cont.new_email %]'>*
+      </td>
+      <td>
+        <span class='error'>[% cont.new_email_error %]</span>
       </td>
     </tr>
   </table>
@@ -222,6 +241,11 @@
 
 [% END %]
 
+[% IF cont.error == 'new' %]
+  <script> 
+    $("#invite").show();
+  </script>
+[% END %]
 
 
 [% END %]

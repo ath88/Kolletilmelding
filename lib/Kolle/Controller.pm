@@ -9,13 +9,14 @@ use Mojo::Log;
 use Kolle::Model;
 
 use HTML::Entities qw(encode_entities);
+use Email::Valid;
 use String::CamelCase qw(camelize);
 use Data::Dumper qw(Dumper);
 $Data::Dumper::Useperl = 1; # For proper dump of UTF-8 characters
 
 my $log = Mojo::Log->new; 
 my $app = new Mojolicious;
-my $title = "M&oslash;lle&aring; divisions seniorkolleuge";
+my $title = "Mølleå Divisions Seniorkolleuge";
 my $debugmode = 0;
 
 $log->debug("MOJO_MODE is @{ [ $app->mode ] }");
@@ -61,26 +62,81 @@ sub postedit {
   my $self = shift;
   my $key = $self->stash('key');
 
-  if ( !get_user($key) ) {
+  my $data = get_user($key);
+  if ( !$data ) {
     $self->session->{'error'} = "Don't do that, mkay?";
     return $self->redirect_to ('/');
   }
 
   $log->debug("Viewing postedit");
 
-  my $postdata;
-  #update_user($user_iden, $postdata);
- 
+  my $request = $self->req;
+  my ($error, $success, $error_desc);
 
-  $log->debug(Dumper($self->req->param('firstname')));
- 
-  my $error;
-  my $success;
-  
-  my $data = get_user($key);
-  
+  if ($request->param('type') eq 'input') {
+    #validate update of user
+    
+    #update_user($user_iden, $postdata);
+    $success = 'updated userdata';
 
-  return $self->render ( template => 'controller/edit', _build_response($data, $error, $success) );
+    #get newest data
+    $data = get_user($key);
+  }
+
+
+  if ($request->param('type') eq 'new') {
+    my $clanname = $request->param('clanname');
+    my $firstname = camelize($request->param('firstname'));
+    my $lastname = camelize($request->param('lastname'));
+    my $email = $request->param('email');
+
+    #can user create new?
+    if ($data->{role} == 2) {
+      $error = 'Kun Klanledere kan invitere medlemmer, lad være med at snyde!';
+      #TODO report
+    }
+    if ($data->{role} == 1 && $clanname ne $data->{'clanname'}) {
+      $error = 'Kun SuperKlanledere kan invitere nye klaner. Stop det! :)';
+      #TODO report
+    }
+    
+    #validate create new user
+    if (not valid_clanname($clanname)) {
+      $data->{new_clanname_error} = 'Der skal være et klannavn.';
+      $error = 'Fejl i oprettelse af ny bruger';
+    }
+    if (not valid_firstname($firstname)) {
+      $data->{new_firstname_error} = 'Ikke et gyldigt navn.';
+      $error = 'Fejl i oprettelse af ny bruger';
+    }
+    if (not valid_lastname($lastname)) {
+      $data->{new_lastname_error} = 'Ikke et gyldigt efternavn.';
+      $error = 'Fejl i oprettelse af ny bruger';
+    }
+    if (not valid_email($email)) {
+      $data->{new_email_error} = 'Ikke en gyldig email-adresse.';
+      $error = 'Fejl i oprettelse af ny bruger';
+    }
+    
+    unless ($error) { 
+      my $role = ($data->{role} + 1);
+      my $ok = create_user($firstname, $lastname, $role, $clanname, $email); 
+
+      if ($ok ) {
+        $success = "created new user, email sent, $ok";
+      } 
+
+    }
+    else {
+      $data->{error} = 'new';
+      $data->{'new_clanname'} = $clanname;
+      $data->{'new_firstname'} = $firstname;
+      $data->{'new_lastname'} = $lastname;
+      $data->{'new_email'} = $email;
+    }
+  }
+ 
+  return $self->render ( template => 'controller/edit', _build_response($data, $error, $success, $error_desc) );
 }
 
 sub edit {
@@ -111,9 +167,9 @@ sub _build_response {
   
   my $encoded_data = encode_struct( $data );
   
-  $response{title}   = $title;
-  $response{error}   = $error;
-  $response{success} = $success;
+  $response{title}   = encode_entities($title);
+  $response{error}   = encode_entities($error);
+  $response{success} = encode_entities($success);
   $response{cont}    = $encoded_data;
   $response{debug}   = Dumper( $encoded_data )  if $debugmode;
 
@@ -143,6 +199,33 @@ sub encode_struct {
   } 
   
   return $result;
+}
+
+sub valid_clanname {
+  my $name = shift;
+  return 0 if $name eq '';
+  return 1;
+}
+sub valid_firstname {
+  my $name = shift;
+  return 0 if $name eq '';
+  return 0 if $name =~ m/\d/;
+  return 1;
+}
+sub valid_lastname {
+  my $name = shift;
+  return 0 if $name =~ m/\d/;
+  return 1;
+}
+sub valid_phone {
+  my $phone = shift;
+  return 1;
+}
+sub valid_email {
+  my $email = shift;
+  return 0 if $email eq '';
+  return 0 unless Email::Valid->address($email);
+  return 1;
 }
 
 1;
