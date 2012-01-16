@@ -18,7 +18,7 @@ Kolle::Model::_truncate();
 my $t = Test::Mojo->new('Kolle');
 
 # does root yield frontpage?
-$t->get_ok('/')->content_like(qr/frontpage/i);
+$t->get_ok('/')->content_like(qr/Seniorkolleuge/i);
 
 # testing if days work
 $t->get_ok('/day/monday',  'get monday'  )->content_like(qr/monday/i ,     'content monday');
