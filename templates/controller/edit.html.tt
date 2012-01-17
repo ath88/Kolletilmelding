@@ -182,7 +182,7 @@
   </table>
   
   <br>
-  <input type='checkbox' name='bogger'> Ja, Bogger må godt bruge mine data herfra til videre kontakt.<br>
+  <input type='checkbox' name='bogger' [% IF cont.bogger %]checked[% END %]> Ja, Bogger må godt bruge mine data herfra til videre kontakt.<br>
   <br>
 
   <input type="submit" value="Send" />

@@ -103,9 +103,9 @@ sub update_user {
 
   return $dbh->do('
     UPDATE user 
-    SET firstname = ?, lastname = ?, phone = ?, email = ?, day1 = ?, day2 = ?, day3 = ?, day4 = ?, day5 = ?, day6 = ?, comment1 = ?, comment2 = ?, comment3 = ?, comment4 = ?, comment5 = ?, comment6 = ?
+    SET firstname = ?, lastname = ?, phone = ?, email = ?, bogger = ?, day1 = ?, day2 = ?, day3 = ?, day4 = ?, day5 = ?, day6 = ?, comment1 = ?, comment2 = ?, comment3 = ?, comment4 = ?, comment5 = ?, comment6 = ?
     WHERE userkey = ?
-  ',undef, $new->{firstname}, $new->{lastname}, $new->{phone}, $new->{email}, $new->{day1}, $new->{day2}, $new->{day3}, $new->{day4}, $new->{day5}, $new->{day6}, $new->{comment1}, $new->{comment2}, $new->{comment3}, $new->{comment4}, $new->{comment5}, $new->{comment6}, $key);
+  ',undef, $new->{firstname}, $new->{lastname}, $new->{phone}, $new->{email}, $new->{bogger}, $new->{day1}, $new->{day2}, $new->{day3}, $new->{day4}, $new->{day5}, $new->{day6}, $new->{comment1}, $new->{comment2}, $new->{comment3}, $new->{comment4}, $new->{comment5}, $new->{comment6}, $key);
 }
 
 sub create_user {
