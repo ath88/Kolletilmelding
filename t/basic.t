@@ -57,14 +57,67 @@ is($user_ref->{firstname}, 'Mikkel');
 is($user_ref->{lastname}, 'Rank');
 is($user_ref->{email}, 'blah@aths.dk', 'email');
 
-update_user($key1,1,0,1,0,1,1,'','','Kommer senere','','','');
-update_user($key2,0,0,0,0,1,0,'','','','','','');
-update_user($key3,1,0,1,0,0,1,'Vil gerne undgå at spise med alligevel','','','','','');
-update_user($key4,1,1,1,1,1,1,'','','','Tager snøfler med','','');
-update_user($key5,1,0,0,1,0,0,'','','','','','');
-update_user($key6,0,1,0,1,1,1,'','','','','','');
-update_user($key7,1,0,0,1,1,1,'Tager en gæst med?','','','','kommer ikke til festen','');
-update_user($key8,1,1,0,1,1,1,'','','','','','');
+my $input = get_user($key1);
+$input->{day1} = 'on';
+$input->{day3} = 'on';
+$input->{day5} = 'on';
+$input->{day6} = 'on';
+$input->{comment3} = 'Kommer måske';
+update_user($key1,$input);
+
+$input = get_user($key2);
+$input->{day5} = 'on';
+update_user($key2,$input);
+
+$input = get_user($key3);
+$input->{day1} = 'on';
+$input->{day3} = 'on';
+$input->{day6} = 'on';
+$input->{comment1} = 'Vil gerne undgå at spise med alligevel';
+update_user($key3,$input);
+
+$input = get_user($key4);
+$input->{day1} = 'on';
+$input->{day2} = 'on';
+$input->{day3} = 'on';
+$input->{day4} = 'on';
+$input->{day5} = 'on';
+$input->{day6} = 'on';
+$input->{comment4} = 'Tager snøfler med';
+update_user($key4,$input);
+
+$input = get_user($key5);
+$input->{day1} = 'on';
+$input->{day4} = 'on';
+update_user($key5,$input);
+
+$input = get_user($key6);
+$input->{day2} = 'on';
+$input->{day4} = 'on';
+$input->{day5} = 'on';
+$input->{day6} = 'on';
+update_user($key6,$input);
+
+$input = get_user($key7);
+$input->{day1} = 'on';
+$input->{day4} = 'on';
+$input->{day5} = 'on';
+$input->{day6} = 'on';
+$input->{comment1} = 'Tager en gæst med?';
+$input->{comment5} = 'Kommer ikke til festen';
+update_user($key7,$input);
+
+$input = get_user($key8);
+$input->{day1} = 'on';
+$input->{day2} = 'on';
+$input->{day4} = 'on';
+$input->{day5} = 'on';
+$input->{day6} = 'on';
+update_user($key8,$input);
+
+#update_user($key6,0,1,0,1,1,1,'','','','','','');
+#update_user($key7,1,0,0,1,1,1,'Tager en gæst med?','','','','kommer ikke til festen','');
+#update_user($key8,1,1,0,1,1,1,'','','','','','');
 
 $user_ref = get_user($key1);
 
