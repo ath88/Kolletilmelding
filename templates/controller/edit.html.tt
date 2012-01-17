@@ -7,8 +7,7 @@
     [% IF cont.role == 1 %]Klanleder,[% END %]
     [% IF cont.role == 0 %]SuperKlanleder,[% END %]
     [% cont.clanname %]
-  </h21>
-
+  </h2>
 
   </center>
 
@@ -185,7 +184,8 @@
   <input type='checkbox' name='bogger' [% IF cont.bogger %]checked[% END %]> Ja, Bogger må godt bruge mine data herfra til videre kontakt.<br>
   <br>
 
-  <input type="submit" value="Send" />
+  <input type="submit" value="Send" /><br>
+  <p><a href='/'>Gå til forsiden</a></p>
   </form>
 
 [% IF cont.role < 2 %]
