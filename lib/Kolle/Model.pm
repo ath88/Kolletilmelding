@@ -10,16 +10,17 @@ our @EXPORT = ('day_exists' ,'get_days', 'get_day', 'get_user', 'update_user', '
 use String::Random qw(random_string);
 use DBI;
 
+use Data::Dumper;
 use Email::Sender::Simple qw(sendmail);
 use MIME::Entity;
 use Encode qw(encode);
 use POSIX;
 
 use Mojo::Base qw(Mojolicious);
+use Mojo::Log;
 
 my $app = new Mojolicious;
-  
-
+my $log = Mojo::Log->new;
 my $dbh = DBI->connect('DBI:mysql:kolle', 'root', '') || die "Could not connect to database: $DBI::errstr";
 $dbh->{'mysql_enable_utf8'} = 1;
 $dbh->{'mysql_auto_reconnect'} = 1;
@@ -80,15 +81,31 @@ sub get_user {
 }
 
 sub update_user {
-  my ($key, $day1, $day2, $day3, $day4, $day5, $day6, $comment1, $comment2, $comment3, $comment4, $comment5, $comment6) = @_;
+  my ($key, $new) = @_;
+  delete $new->{type};
+  my @bools = qw( bogger day1 day2 day3 day4 day5 day6 );
+  foreach my $key (@bools) {
+    if (defined $new->{$new} && $new->{$key} eq 'on') {
+      $new->{$key} = 1;
+    }
+    else {
+      $new->{$key} = 0;
+    }
+  }
 
-  $dbh->do('
-    UPDATE user 
-    SET day1 = ?, day2 = ?, day3 = ?, day4 = ?, day5 = ?, day6 = ?, comment1 = ?, comment2 = ?, comment3 = ?, comment4 = ?, comment5 = ?, comment6 = ?
-    WHERE userkey = ?
-  ',undef, $day1, $day2, $day3, $day4, $day5, $day6, $comment1, $comment2, $comment3, $comment4, $comment5, $comment6, $key);
+  my $old = get_user($key);
+  delete $old->{clanname};
+  delete $old->{id};
+  delete $old->{userkey};
+  delete $old->{role};
+  my $diff = _getDiffFromHashes( $old, $new );
+  $log->info( "Update, key = $key.\n$diff" ) if $diff;
 
-  return 1;
+#  return $dbh->do('
+#    UPDATE user 
+#    SET firstname = ?, lastname = ?, phone = ?, email = ?, day1 = ?, day2 = ?, day3 = ?, day4 = ?, day5 = ?, day6 = ?, comment1 = ?, comment2 = ?, comment3 = ?, comment4 = ?, comment5 = ?, comment6 = ?
+#    WHERE userkey = ?
+#  ',undef, $firstname, $lastname, $phone, $email, $day1, $day2, $day3, $day4, $day5, $day6, $comment1, $comment2, $comment3, $comment4, $comment5, $comment6, $key);
 }
 
 sub create_user {
@@ -129,6 +146,26 @@ sub _truncate {
   $dbh->do('
     truncate table user
   ');
+}
+
+sub _getDiffFromHashes {
+  my ($hash1, $hash2) = @_;
+  my $result;
+  for my $key ( keys %{$hash1} ) {
+    if ( !defined( $hash2->{$key} ) ) {
+      $result .= "Key: $key = no longer used\n";
+      next;
+    }
+    if ($hash1->{$key} ne $hash2->{$key}) {
+      $result .= "Key: $key = [" . $hash1->{$key} . '] becomes [' . $hash2->{$key} . "]\n";
+    }
+  }
+  for my $key ( keys %{$hash2} ) {
+    if ( !defined( $hash1->{$key} ) ) {
+      $result .= "[$key] is new\n";
+    }
+  }
+  return $result;
 }
 
 1;

@@ -10,6 +10,7 @@ use Kolle::Model;
 
 use HTML::Entities qw(encode_entities);
 use Email::Valid;
+use Validate::Tiny qw(validate);
 use String::CamelCase qw(camelize);
 use Data::Dumper qw(Dumper);
 $Data::Dumper::Useperl = 1; # For proper dump of UTF-8 characters
@@ -74,23 +75,72 @@ sub postedit {
   my ($error, $success, $error_desc);
 
   if ($request->param('type') eq 'input') {
-    #validate update of user
-    
-    #update_user($user_iden, $postdata);
-    $success = 'updated userdata';
+    my $post = _postToHashref( $request );
+    $post->{firstname} = camelize( $post->{firstname} );
+    $post->{lastname} = camelize( $post->{lastname} );
 
-    #get newest data
-    $data = get_user($key);
+    # can user edit this user (?)
+
+
+    # validate data
+    my %input = (
+      firstname => $post->{firstname},
+      lastname =>$post->{lastname},
+      phone => $post->{phone},
+      email => $post->{email},
+      bogger => $post->{bogger},
+    );
+
+    my %rules = (
+      fields => [ 'firstname', 'lastname', 'phone', 'email', 'bogger' ],
+      checks => [
+        [ qw/firstname lastname email/ ] => sub {
+          my $value = shift;
+          if ( !defined $value || $value eq '' ) {
+            return "Feltet må ikke være tomt";
+          }
+          return undef;
+        },
+        firstname => \&valid_name,
+        lastname => \&valid_name,
+        phone => \&valid_phone,
+        email => \&valid_email,
+      ]
+    );
+
+    my $result = validate( \%input, \%rules );
+
+    # decide on result
+    if ( $result->{success} ) {
+      my $role = ($data->{role} + 1);
+#      my $ok = update_user($firstname, $lastname, $phone, $email, $bogger, $key, $day1, $day2, $day3, $day4, $day5, $day6, $comment1, $comment2, $comment3, $comment4, $comment5, $comment6);
+      my $ok = update_user($key, $post);
+
+      if ( $ok ) {
+        $success = 'Brugeren er opdateret.';
+        #get newest data
+        $data = get_user($key);
+      }
+    } else {
+      $data->{error} = 'input';
+      $data->{error_msg} = $result->{error};
+#      $data->{'firstname'} = $firstname;
+#      $data->{'lastname'} = $lastname;
+#      $data->{'phone'} = $phone;
+#      $data->{'email'} = $email;
+#      $data->{'bogger'} = $bogger;
+    }
+ 
   }
 
 
   if ($request->param('type') eq 'new') {
-    my $clanname = $request->param('clanname');
-    my $firstname = camelize($request->param('firstname'));
-    my $lastname = camelize($request->param('lastname'));
-    my $email = $request->param('email');
+    my $clanname = $request->param('new_clanname');
+    my $firstname = camelize($request->param('new_firstname'));
+    my $lastname = camelize($request->param('new_lastname'));
+    my $email = $request->param('new_email');
 
-    #can user create new?
+    # can user create new user?
     if ($data->{role} == 2) {
       $error = 'Kun Klanledere kan invitere medlemmer, lad være med at snyde!';
       #TODO report
@@ -99,36 +149,47 @@ sub postedit {
       $error = 'Kun SuperKlanledere kan invitere nye klaner. Stop det! :)';
       #TODO report
     }
+
+    #TODO bruger med email eksisterer allerede
     
-    #validate create new user
-    if (not valid_clanname($clanname)) {
-      $data->{new_clanname_error} = 'Der skal være et klannavn.';
-      $error = 'Fejl i oprettelse af ny bruger';
-    }
-    if (not valid_firstname($firstname)) {
-      $data->{new_firstname_error} = 'Ikke et gyldigt navn.';
-      $error = 'Fejl i oprettelse af ny bruger';
-    }
-    if (not valid_lastname($lastname)) {
-      $data->{new_lastname_error} = 'Ikke et gyldigt efternavn.';
-      $error = 'Fejl i oprettelse af ny bruger';
-    }
-    if (not valid_email($email)) {
-      $data->{new_email_error} = 'Ikke en gyldig email-adresse.';
-      $error = 'Fejl i oprettelse af ny bruger';
-    }
+    # validate data
+    my %input = (
+      new_clanname => $clanname,
+      new_firstname => $firstname,
+      new_lastname => $lastname,
+      new_email => $email,
+    );
+
+    my %rules = (
+      fields => [ 'new_clanname', 'new_firstname', 'new_lastname', 'new_email' ],
+      checks => [
+        [ qw/new_clanname new_firstname new_email/ ] => sub {
+          my $value = shift;
+          if ( !defined $value || $value eq '' ) {
+            return "Feltet må ikke være tomt";
+          }
+          return undef;
+        },
+        new_firstname => \&valid_name,
+        new_lastname => \&valid_name,
+        new_email => \&valid_email,
+      ]
+    );
     
-    unless ($error) { 
+    my $result = validate( \%input, \%rules );
+
+    # decide on result
+    if ( $result->{success} ) {
       my $role = ($data->{role} + 1);
       my $ok = create_user($firstname, $lastname, $role, $clanname, $email); 
 
       if ($ok ) {
-        $success = "created new user, email sent, $ok";
-      } 
-
-    }
-    else {
+        $success = 'Brugeren er oprettet og en email er sendt.';
+        $success .= " Ny nøgle: [$ok]" if $app->mode ne 'production';
+      }      
+    } else {
       $data->{error} = 'new';
+      $data->{error_msg} = $result->{error};
       $data->{'new_clanname'} = $clanname;
       $data->{'new_firstname'} = $firstname;
       $data->{'new_lastname'} = $lastname;
@@ -201,31 +262,26 @@ sub encode_struct {
   return $result;
 }
 
-sub valid_clanname {
+sub valid_name {
   my $name = shift;
-  return 0 if $name eq '';
-  return 1;
+  return 'Må ikke indeholde tal' if $name =~ m/\d/;
+  return undef;
 }
-sub valid_firstname {
-  my $name = shift;
-  return 0 if $name eq '';
-  return 0 if $name =~ m/\d/;
-  return 1;
-}
-sub valid_lastname {
-  my $name = shift;
-  return 0 if $name =~ m/\d/;
-  return 1;
-}
+
 sub valid_phone {
   my $phone = shift;
-  return 1;
+  return undef;
 }
+
 sub valid_email {
   my $email = shift;
-  return 0 if $email eq '';
-  return 0 unless Email::Valid->address($email);
-  return 1;
+  return 'Ugyldig e-mail-adresse' unless Email::Valid->address( $email );
+  return undef;
+}
+
+sub _postToHashref {
+  my ($request) = @_;
+  return {@{${$request->params}{params}}};
 }
 
 1;

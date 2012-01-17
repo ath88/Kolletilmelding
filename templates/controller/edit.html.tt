@@ -139,8 +139,11 @@
       <td width='150px'>
         Fornavn:
       </td>
+      <td width='168px'>
+        <input type='text' name='firstname' value='[% cont.firstname %]'>*
+      </td>
       <td>
-        <input type='text' name='firstname' value='[% cont.firstname %]'>
+        <span class='error'>[% cont.error_msg.firstname %]</span>
       </td>
     </tr>
     <tr>
@@ -148,7 +151,10 @@
         Efternavn:
       </td>
       <td>
-        <input type='text' name='lastname' value='[% cont.lastname %]'>
+        <input type='text' name='lastname' value='[% cont.lastname %]'>*
+      </td>
+      <td>
+        <span class='error'>[% cont.error_msg.lastname %]</span>
       </td>
     </tr>
     <tr>
@@ -158,19 +164,25 @@
       <td>
         <input type='text' name='phone' value='[% cont.phone %]'>
       </td>
+      <td>
+        <span class='error'>[% cont.error_msg.phone %]</span>
+      </td>
     </tr>
     <tr>
       <td>
         E-mail:
       </td>
       <td>
-        <input type='text' name='email' value='[% cont.email %]'>
+        <input type='text' name='email' value='[% cont.email %]'>*
+      </td>
+      <td>
+        <span class='error'>[% cont.error_msg.email %]</span>
       </td>
     </tr>
   </table>
   
   <br>
-  <input type='checkbox'> Ja, Bogger må godt bruge mine data herfra til videre kontakt.<br>
+  <input type='checkbox' name='bogger'> Ja, Bogger må godt bruge mine data herfra til videre kontakt.<br>
   <br>
 
   <input type="submit" value="Send" />
@@ -195,10 +207,10 @@
         [% ELSE %]
           [% clanname = cont.clanname %]
         [% END %]
-        <input type='text' name='clanname' value='[% clanname %]' [% IF cont.role != 0 %]readonly[% END %]>*
+        <input type='text' name='new_clanname' value='[% clanname %]' [% IF cont.role != 0 %]readonly[% END %]>*
       </td>
       <td>
-        <span class='error'>[% cont.new_clanname_error %]</span>
+        <span class='error'>[% cont.error_msg.new_clanname %]</span>
       </td>
     </tr>
     <tr>
@@ -206,10 +218,10 @@
         Fornavn:
       </td>
       <td>
-        <input type='text' name='firstname' value='[% cont.new_firstname %]'>*
+        <input type='text' name='new_firstname' value='[% cont.new_firstname %]'>*
       </td>
       <td>
-        <span class='error'>[% cont.new_firstname_error %]</span>
+        <span class='error'>[% cont.error_msg.new_firstname %]</span>
       </td>
     </tr>
     <tr>
@@ -217,10 +229,10 @@
         Efternavn:
       </td>
       <td>
-        <input type='text' name='lastname' value='[% cont.new_lastname %]'>
+        <input type='text' name='new_lastname' value='[% cont.new_lastname %]'>
       </td>
       <td>
-        <span class='error'>[% cont.new_lastname_error %]</span>
+        <span class='error'>[% cont.error_msg.new_lastname %]</span>
       </td>
     </tr>
     <tr>
@@ -228,10 +240,10 @@
         E-mail:
       </td>
       <td>
-        <input type='text' name='email' value='[% cont.new_email %]'>*
+        <input type='text' name='new_email' value='[% cont.new_email %]'>*
       </td>
       <td>
-        <span class='error'>[% cont.new_email_error %]</span>
+        <span class='error'>[% cont.error_msg.new_email %]</span>
       </td>
     </tr>
   </table>
