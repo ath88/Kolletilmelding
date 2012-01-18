@@ -1,13 +1,14 @@
 <div class="message">
-  <span class="success">
-    [% success %]
-  </span>
-  <span class="error">
-    [% error %]
-  </span>
-  <span class="debug">
-    [% debug %]
-  </span>
+  [% IF success %]
+    <span class="success">
+      [% success %]<br>
+    </span>
+  [% END %]
+  [% IF error %]
+    <span class="error">
+      [% error %]<br>
+    </span>
+  [% END %]
 </div>
 
 

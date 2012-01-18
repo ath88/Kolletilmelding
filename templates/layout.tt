@@ -14,5 +14,9 @@
     <div class="frame">
       [% content %]
     </div>
+    [% INCLUDE debug.tt %]
+    [% IF mode %]
+      <center><h2 class='focus'>[% mode %]</h2></center>
+    [% END %]
   </body>
 </html>

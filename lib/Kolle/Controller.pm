@@ -242,6 +242,7 @@ sub _build_response {
   $response{success} = encode_entities($success);
   $response{cont}    = $encoded_data;
   $response{debug}   = Dumper( $encoded_data )  if $debugmode;
+  $response{mode}    = camelize( $app->mode ) unless $app->mode eq 'production';
 
   return %response unless defined $custom_ref;
 
