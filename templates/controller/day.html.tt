@@ -5,7 +5,7 @@
     <h2 class='focus'>[% total %] tilmeldte</h2>
     <p>Her kan du se hvem der er tilmeldt, og om de har kommentarer til dagen.<br>
        Dem med kommentarer, men uden tilmeldning, ses nederst.</p>
-  
+  </center>
 
   <table border='0' width='100%'>
     <tr class='header'>
@@ -16,7 +16,6 @@
         <span class='header'>Kommentar</span>
       </td>
     </tr>
-
     [% SET count = 0 %]
     [% FOREACH user IN cont %]
     [% count = (count + 1) mod 2 %]
@@ -27,6 +26,7 @@
     [% END %]
   </table>
 
+  <p><a href='/'>Gå til forsiden</a></p>
 
 [% END %]
 
