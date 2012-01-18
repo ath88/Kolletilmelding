@@ -111,6 +111,8 @@ sub update_user {
   my $diff = _getDiffFromHashes( $old, $new );
   $log->info( "Update, key = $key.\n$diff" ) if $diff;
 
+  return 0 unless $diff;
+
   return $dbh->do('
     UPDATE user 
     SET firstname = ?, lastname = ?, phone = ?, email = ?, bogger = ?, day1 = ?, day2 = ?, day3 = ?, day4 = ?, day5 = ?, day6 = ?, comment1 = ?, comment2 = ?, comment3 = ?, comment4 = ?, comment5 = ?, comment6 = ?

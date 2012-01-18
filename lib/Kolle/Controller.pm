@@ -122,11 +122,10 @@ sub postedit {
     # decide on result
     if ( $result->{success} ) {
       my $role = ($data->{role} + 1);
-#      my $ok = update_user($firstname, $lastname, $phone, $email, $bogger, $key, $day1, $day2, $day3, $day4, $day5, $day6, $comment1, $comment2, $comment3, $comment4, $comment5, $comment6);
       my $ok = update_user($key, $post);
 
       if ( $ok ) {
-        $success = 'Brugeren er opdateret.';
+        $success = 'Brugeren er opdateret';
         #get newest data
         $data = get_user($key);
       }
@@ -138,6 +137,7 @@ sub postedit {
 #      $data->{'phone'} = $phone;
 #      $data->{'email'} = $email;
 #      $data->{'bogger'} = $bogger;
+      $error = 'Opdateringen mislykkedes';
     }
  
   }
@@ -193,7 +193,7 @@ sub postedit {
       my $ok = create_user($firstname, $lastname, $role, $clanname, $email); 
 
       if ($ok ) {
-        $success = 'Brugeren er oprettet og en email er sendt.';
+        $success = 'Brugeren er oprettet og en email er sendt';
         $success .= " Ny nøgle: [$ok]" if $app->mode ne 'production';
       }      
     } else {
@@ -203,6 +203,7 @@ sub postedit {
       $data->{'new_firstname'} = $firstname;
       $data->{'new_lastname'} = $lastname;
       $data->{'new_email'} = $email;
+      $error = 'Oprettelsen mislykkedes';
     }
   }
  
