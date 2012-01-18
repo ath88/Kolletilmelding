@@ -1,0 +1,9 @@
+[% IF debug %]
+  <div class="message">
+    <span class="debug">
+      [% debug %]<br>
+    </span>
+  </div>
+[% END %]
+
+
