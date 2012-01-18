@@ -28,13 +28,22 @@ sub frontpage {
   $log->debug("Viewing frontpage");
   my $self = shift;
 
-
   my $data = get_days();
+
+  my $totals;
+  foreach my $array (@{$data}) {
+    $totals->{day1}++ if $array->[3];
+    $totals->{day2}++ if $array->[5];
+    $totals->{day3}++ if $array->[7];
+    $totals->{day4}++ if $array->[9];
+    $totals->{day5}++ if $array->[11];
+    $totals->{day6}++ if $array->[13];
+  }
 
   my $success;
   my $error = $self->session->{'error'};
   delete $self->session->{'error'};
-  return $self->render ( _build_response($data, $error, $success) );
+  return $self->render ( _build_response($data, $error, $success, $totals) );
 }
 
 sub day {
