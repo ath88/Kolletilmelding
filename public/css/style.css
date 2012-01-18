@@ -96,6 +96,10 @@ input {
   background-color: #eee8d5;
 }
 
+input.form {
+  width: 150px;
+}
+
 h2.focus {
   color: #cb4b16;
 }

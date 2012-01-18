@@ -151,12 +151,12 @@ sub postedit {
 
     # can user create new user?
     if ($data->{role} == 2) {
-      $error = 'Kun Klanledere kan invitere medlemmer, lad være med at snyde!';
-      #TODO report
+      $error++; 
+      $log->warn('ID [' . $data->{id} . ']: Forsøg på at invitere klanmedlem uden lederstatus');
     }
     if ($data->{role} == 1 && $clanname ne $data->{'clanname'}) {
-      $error = 'Kun SuperKlanledere kan invitere nye klaner. Stop det! :)';
-      #TODO report
+      $error++; 
+      $log->warn('ID [' . $data->{id} . ']: Forsøg på at invitere klanleder uden superlederstatus');
     }
 
     #TODO bruger med email eksisterer allerede
@@ -188,7 +188,7 @@ sub postedit {
     my $result = validate( \%input, \%rules );
 
     # decide on result
-    if ( $result->{success} ) {
+    if ( $result->{success} && !$error) {
       my $role = ($data->{role} + 1);
       my $ok = create_user($firstname, $lastname, $role, $clanname, $email); 
 

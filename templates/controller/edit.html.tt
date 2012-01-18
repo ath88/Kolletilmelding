@@ -139,7 +139,7 @@
         Fornavn:
       </td>
       <td width='168px'>
-        <input type='text' name='firstname' value='[% cont.firstname %]'>*
+        <input type='text' class='form' name='firstname' value='[% cont.firstname %]'>*
       </td>
       <td>
         <span class='error'>[% cont.error_msg.firstname %]</span>
@@ -150,7 +150,7 @@
         Efternavn:
       </td>
       <td>
-        <input type='text' name='lastname' value='[% cont.lastname %]'>*
+        <input type='text' class='form' name='lastname' value='[% cont.lastname %]'>*
       </td>
       <td>
         <span class='error'>[% cont.error_msg.lastname %]</span>
@@ -161,7 +161,7 @@
         Telefon:
       </td>
       <td>
-        <input type='text' name='phone' value='[% cont.phone %]'>
+        <input type='text' class='form' name='phone' value='[% cont.phone %]'>
       </td>
       <td>
         <span class='error'>[% cont.error_msg.phone %]</span>
@@ -172,7 +172,7 @@
         E-mail:
       </td>
       <td>
-        <input type='text' name='email' value='[% cont.email %]'>*
+        <input type='text' class='form' name='email' value='[% cont.email %]'>*
       </td>
       <td>
         <span class='error'>[% cont.error_msg.email %]</span>
@@ -207,7 +207,7 @@
         [% ELSE %]
           [% clanname = cont.clanname %]
         [% END %]
-        <input type='text' name='new_clanname' value='[% clanname %]' [% IF cont.role != 0 %]readonly[% END %]>*
+        <input type='text' class='form' name='new_clanname' value='[% clanname %]' [% IF cont.role != 0 %]readonly[% END %]>*
       </td>
       <td>
         <span class='error'>[% cont.error_msg.new_clanname %]</span>
@@ -218,7 +218,7 @@
         Fornavn:
       </td>
       <td>
-        <input type='text' name='new_firstname' value='[% cont.new_firstname %]'>*
+        <input type='text' class='form' name='new_firstname' value='[% cont.new_firstname %]'>*
       </td>
       <td>
         <span class='error'>[% cont.error_msg.new_firstname %]</span>
@@ -229,7 +229,7 @@
         Efternavn:
       </td>
       <td>
-        <input type='text' name='new_lastname' value='[% cont.new_lastname %]'>
+        <input type='text' class='form' name='new_lastname' value='[% cont.new_lastname %]'>
       </td>
       <td>
         <span class='error'>[% cont.error_msg.new_lastname %]</span>
@@ -240,7 +240,7 @@
         E-mail:
       </td>
       <td>
-        <input type='text' name='new_email' value='[% cont.new_email %]'>*
+        <input type='text' class='form' name='new_email' value='[% cont.new_email %]'>*
       </td>
       <td>
         <span class='error'>[% cont.error_msg.new_email %]</span>
