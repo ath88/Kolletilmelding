@@ -149,7 +149,8 @@ sub create_user {
     Data    => encode('UTF-8',$body),
   );
 
-  sendmail($mail);
+  eval { sendmail($mail) };
+  $log->debug("Email not sent, possible lack of postfix") if $@;
 
   return $random_string;
 }
