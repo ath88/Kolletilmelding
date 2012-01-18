@@ -229,6 +229,20 @@ sub edit {
   return $self->render ( _build_response($data, $error, $success) );
 }
 
+sub dev {
+  my $self = shift;
+  $log->debug("Viewing dev");
+
+  return $self->render_not_found if $app->mode eq 'production';
+  
+  my $data = get_days();
+  my $error;
+  my $success;
+
+  return $self->render ( _build_response($data, $error, $success) );  
+}
+
+
 ###### non-route subroutines ######
 
 sub _build_response {

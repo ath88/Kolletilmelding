@@ -27,6 +27,7 @@ sub startup {
   $r->route('/day/:weekday')->to('controller#day');
   $r->route('/edit/:key')->via('POST')->to('controller#postedit');
   $r->route('/edit/:key')->to('controller#edit');
+  $r->route('/dev')->to('controller#dev');
 }
 
 1;

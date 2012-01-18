@@ -43,7 +43,7 @@ sub day_exists {
 
 sub get_days {
   my $array_ref = $dbh->selectall_arrayref('
-    SELECT firstname, lastname, clanname, day1, comment1, day2, comment2, day3, comment3, day4, comment4, day5, comment5, day6, comment6
+    SELECT firstname, lastname, clanname, day1, comment1, day2, comment2, day3, comment3, day4, comment4, day5, comment5, day6, comment6, id, userkey
     FROM user
   ');
 
