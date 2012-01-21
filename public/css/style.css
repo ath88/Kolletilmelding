@@ -132,6 +132,14 @@ input {
   background-color: #eee8d5;
 }
 
+input.text {
+  width: 155px;
+}
+ 
+input.comment {
+  width: 533px;
+}
+
 h2.focus {
   color: #cb4b16;
 }
