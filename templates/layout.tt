@@ -10,10 +10,11 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
   </head>
   <body>
-   <div class="container">
-    [% INCLUDE message.tt %]    
-    <div class="frame">
-      [% content %]
+    <div class="container">
+      [% INCLUDE message.tt %]    
+      <div class="frame">
+       [% content %]
+      </div>
     </div>
     <div class="footer">
     [% INCLUDE debug.tt %]
@@ -28,6 +29,5 @@
         </span>
       </div>
     </div>
-   </div>
   </body>
 </html>
