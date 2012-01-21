@@ -1,9 +1,7 @@
 [% IF debug %]
-  <div class="message">
-    <span class="debug">
-      [% debug %]<br>
-    </span>
-  </div>
+  <span class="debug">
+    [% debug %]<br>
+  </span>
 [% END %]
 
 

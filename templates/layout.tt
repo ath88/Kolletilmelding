@@ -10,13 +10,24 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
   </head>
   <body>
+   <div class="container">
     [% INCLUDE message.tt %]    
     <div class="frame">
       [% content %]
     </div>
+    <div class="footer">
     [% INCLUDE debug.tt %]
-    [% IF mode %]
-      <center><h2 class='focus'>[% mode %]</h2></center>
-    [% END %]
+      [% IF mode %]
+        <center><h2 class="focus">[% mode %]</h2></center>
+      [% END %]
+      <div class="foot">
+        <a href="http://www.perl.org"><img class="perl" src="http://twiki.org/pub/perl-logo-88x31.gif"></a>
+        <span class="footer">
+          Af Asbj&oslash;rn Thegler for M&oslash;lle&aring; Division<br>
+          <a href="mailto:senior@moelleaa.dk">senior@moelleaa.dk</a>
+        </span>
+      </div>
+    </div>
+   </div>
   </body>
 </html>

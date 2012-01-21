@@ -1,8 +1,23 @@
-body {
+html,body {
   background-color: #073642;
   font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
   font-size: 13px;
   color: #93a1a1;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+div.container {
+  height: 100%;
+  position: relative;
+}
+
+div.message {
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
 }
 
 div.frame {
@@ -15,11 +30,20 @@ div.frame {
   padding-top: 5px;
 }
 
-div.message {
-  height: 60px;
+div.footer {
+  position: absolute;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
-  width: 800px;
+  bottom: 0px;
+}
+
+div.foot {
+  width: 600px; 
+  height: 40px; 
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
 }
 
 div.comment {
@@ -33,6 +57,13 @@ div.commentspace {
 
 div.invite {
   display: none;
+}
+
+img.perl {
+  position: absolute;
+  float: right;
+  top: 0px;
+  right: 0px;
 }
 
 a {
@@ -52,6 +83,10 @@ a.comment_star {
 
 a.comment_star:hover {
   background-color: #dc322f;
+}
+
+span.footer {
+  font-size: 10px;
 }
 
 span.success {
