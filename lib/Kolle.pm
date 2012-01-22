@@ -5,6 +5,8 @@ use Mojo::Base 'Mojolicious';
 sub startup {
   my $self = shift;
 
+  $self->secret('some of the text formatting properties. The heading uses the');
+ 
  # Tell Mojolicious we want to load the TT renderer plugin
   $self->plugin(tt_renderer => {
     template_options => {
