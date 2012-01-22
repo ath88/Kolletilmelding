@@ -101,33 +101,33 @@
     <hr />
   <div class='comment' id='comment1'>
     <span class='header'>Kommentar til Mandag</span><p>
-    <input name='comment1' type='text' size='83' maxlength='500' value='[% cont.comment1 %]'>
-    <a onclick='document.input.comment1.value="";$("#comment1").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment1").slideToggle("slow");'>Luk</a>
+    <input name='comment1' type='text' class='comment' maxlength='500' value='[% cont.comment1 %]'>
+    <a onclick='document.input.comment1.value="";$("#comment1").slideToggle("slow");'>Slet</a> - <a onclick='$("#comment1").slideToggle("slow");'>Luk</a>
   </div>
   <div class='comment' id='comment2'>
     <span class='header'>Kommentar til Tirsdag</span><p>
-    <input name='comment2' type='text' size='83' maxlength='500' value='[% cont.comment2 %]'>
-    <a onclick='document.input.comment2.value="";$("#comment2").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment2").slideToggle("slow");'>Luk</a>
+    <input name='comment2' type='text' class='comment' maxlength='500' value='[% cont.comment2 %]'>
+    <a onclick='document.input.comment2.value="";$("#comment2").slideToggle("slow");'>Slet</a> - <a onclick='$("#comment2").slideToggle("slow");'>Luk</a>
   </div>
   <div class='comment' id='comment3'>
     <span class='header'>Kommentar til Onsdag</span><p>
-    <input name='comment3' type='text' size='83' maxlength='500' value='[% cont.comment3 %]'>
-    <a onclick='document.input.comment3.value="";$("#comment3").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment3").slideToggle("slow");'>Luk</a>
+    <input name='comment3' type='text' class='comment' maxlength='500' value='[% cont.comment3 %]'>
+    <a onclick='document.input.comment3.value="";$("#comment3").slideToggle("slow");'>Slet</a> - <a onclick='$("#comment3").slideToggle("slow");'>Luk</a>
   </div>
   <div class='comment' id='comment4'>
     <span class='header'>Kommentar til Torsdag</span><p>
-    <input name='comment4' type='text' size='83' maxlength='500' value='[% cont.comment4 %]'>
-    <a onclick='document.input.comment4.value="";$("#comment4").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment4").slideToggle("slow");'>Luk</a>
+    <input name='comment4' type='text' class='comment' maxlength='500' value='[% cont.comment4 %]'>
+    <a onclick='document.input.comment4.value="";$("#comment4").slideToggle("slow");'>Slet</a> - <a onclick='$("#comment4").slideToggle("slow");'>Luk</a>
   </div>
   <div class='comment' id='comment5'>
     <span class='header'>Kommentar til Fredag</span><p>
-    <input name='comment5' type='text' size='83' maxlength='500' value='[% cont.comment5 %]'>
-    <a onclick='document.input.comment5.value="";$("#comment5").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment5").slideToggle("slow");'>Luk</a>
+    <input name='comment5' type='text' class='comment' maxlength='500' value='[% cont.comment5 %]'>
+    <a onclick='document.input.comment5.value="";$("#comment5").slideToggle("slow");'>Slet</a> - <a onclick='$("#comment5").slideToggle("slow");'>Luk</a>
   </div>
   <div class='comment' id='comment6'>
     <span class='header'>Kommentar til L&oslash;rdag</span><p>
-    <input name='comment6' type='text' size='83' maxlength='500' value='[% cont.comment6 %]'>
-    <a onclick='document.input.comment6.value="";$("#comment6").slideToggle("slow");'>Slet</a>  <a onclick='$("#comment6").slideToggle("slow");'>Luk</a>
+    <input name='comment6' type='text' class='comment' maxlength='500' value='[% cont.comment6 %]'>
+    <a onclick='document.input.comment6.value="";$("#comment6").slideToggle("slow");'>Slet</a> - <a onclick='$("#comment6").slideToggle("slow");'>Luk</a>
   </div>
     <hr />
   </div>
@@ -139,7 +139,7 @@
         Fornavn:
       </td>
       <td width='168px'>
-        <input type='text' class='form' name='firstname' value='[% cont.firstname %]'>*
+        <input type='text' class='text' name='firstname' value='[% cont.firstname %]'>*
       </td>
       <td>
         <span class='error'>[% cont.error_msg.firstname %]</span>
@@ -150,7 +150,7 @@
         Efternavn:
       </td>
       <td>
-        <input type='text' class='form' name='lastname' value='[% cont.lastname %]'>*
+        <input type='text' class='text' name='lastname' value='[% cont.lastname %]'>*
       </td>
       <td>
         <span class='error'>[% cont.error_msg.lastname %]</span>
@@ -161,7 +161,7 @@
         Telefon:
       </td>
       <td>
-        <input type='text' class='form' name='phone' value='[% cont.phone %]'>
+        <input type='text' class='text' name='phone' value='[% cont.phone %]'>
       </td>
       <td>
         <span class='error'>[% cont.error_msg.phone %]</span>
@@ -172,7 +172,7 @@
         E-mail:
       </td>
       <td>
-        <input type='text' class='form' name='email' value='[% cont.email %]'>*
+        <input type='text' class='text' name='email' value='[% cont.email %]'>*
       </td>
       <td>
         <span class='error'>[% cont.error_msg.email %]</span>
@@ -207,7 +207,7 @@
         [% ELSE %]
           [% clanname = cont.clanname %]
         [% END %]
-        <input type='text' class='form' name='new_clanname' value='[% clanname %]' [% IF cont.role != 0 %]readonly[% END %]>*
+        <input type='text' class='text' name='new_clanname' value='[% clanname %]' [% IF cont.role != 0 %]readonly[% END %]>*
       </td>
       <td>
         <span class='error'>[% cont.error_msg.new_clanname %]</span>
@@ -218,7 +218,7 @@
         Fornavn:
       </td>
       <td>
-        <input type='text' class='form' name='new_firstname' value='[% cont.new_firstname %]'>*
+        <input type='text' class='text' name='new_firstname' value='[% cont.new_firstname %]'>*
       </td>
       <td>
         <span class='error'>[% cont.error_msg.new_firstname %]</span>
@@ -229,7 +229,7 @@
         Efternavn:
       </td>
       <td>
-        <input type='text' class='form' name='new_lastname' value='[% cont.new_lastname %]'>
+        <input type='text' class='text' name='new_lastname' value='[% cont.new_lastname %]'>
       </td>
       <td>
         <span class='error'>[% cont.error_msg.new_lastname %]</span>
@@ -240,7 +240,7 @@
         E-mail:
       </td>
       <td>
-        <input type='text' class='form' name='new_email' value='[% cont.new_email %]'>*
+        <input type='text' class='text' name='new_email' value='[% cont.new_email %]'>*
       </td>
       <td>
         <span class='error'>[% cont.error_msg.new_email %]</span>

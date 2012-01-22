@@ -1,18 +1,15 @@
-body {
+html,body {
   background-color: #073642;
   font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
   font-size: 13px;
   color: #93a1a1;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
 }
 
-div.frame {
-  margin-top: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  height: auto;
-  width: 540px;
-  padding-bottom: 25px;
-  padding-top: 5px;
+div.container {
+  min-height: 100%;
 }
 
 div.message {
@@ -20,6 +17,34 @@ div.message {
   margin-left: auto;
   margin-right: auto;
   width: 800px;
+}
+
+div.frame {
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 540px;
+  padding-top: 5px;
+  padding-bottom: 100px;
+  overflow: auto;
+}
+
+div.footer {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  margin-top: -120px;
+  height: 100px;
+  clear: both;
+}
+
+div.foot {
+  width: 600px; 
+  height: 40px; 
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
 }
 
 div.comment {
@@ -33,6 +58,13 @@ div.commentspace {
 
 div.invite {
   display: none;
+}
+
+img.perl {
+  position: absolute;
+  float: right;
+  top: 0px;
+  right: 0px;
 }
 
 a {
@@ -52,6 +84,10 @@ a.comment_star {
 
 a.comment_star:hover {
   background-color: #dc322f;
+}
+
+span.footer {
+  font-size: 10px;
 }
 
 span.success {
@@ -89,15 +125,19 @@ td.edit_weekday {
 }
 
 td.comment {
-  width: 400;
+  width: 400px;
 }
 
 input {
   background-color: #eee8d5;
 }
 
-input.form {
-  width: 150px;
+input.text {
+  width: 155px;
+}
+ 
+input.comment {
+  width: 533px;
 }
 
 h2.focus {
