@@ -87,6 +87,14 @@ sub get_user {
     WHERE userkey = ?
   ',undef,$key);
 
+  if ($result_ref->{phone} ne '') {
+    my @array = split(//,$result_ref->{phone});
+    splice(@array,2,0,' ');
+    splice(@array,5,0,' ');
+    splice(@array,8,0,' ');
+    $result_ref->{phone} = join('',@array); 
+  }
+
   return $result_ref;
 }
 

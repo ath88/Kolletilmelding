@@ -86,7 +86,8 @@ sub postedit {
   if ($request->param('type') eq 'input') {
     my $post = _postToHashref( $request );
     $post->{firstname} = camelize( $post->{firstname} );
-    $post->{lastname} = camelize( $post->{lastname} );
+    $post->{lastname}  = camelize( $post->{lastname} );
+    $post->{phone}     =~ s/\s//g; 
 
     # can user edit this user (?)
 
@@ -295,6 +296,8 @@ sub valid_name {
 
 sub valid_phone {
   my $phone = shift;
+  return undef if $phone eq '';
+  return 'Ugyldigt telefonnummer' unless $phone =~ m/^\d{8}$/;
   return undef;
 }
 
