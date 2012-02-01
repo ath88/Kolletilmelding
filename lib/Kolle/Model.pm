@@ -149,7 +149,7 @@ sub create_user {
   );
 
   eval { sendmail($mail) };
-  $log->debug("Email not sent, possible lack of postfix") if $@;
+  $log->info("Email not sent, possible lack of postfix") if $@;
 
   return $random_string;
 }
