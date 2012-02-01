@@ -5,7 +5,7 @@ use warnings;
 use utf8;
 
 use base 'Exporter';
-our @EXPORT = ('day_exists' ,'get_days', 'get_day', 'get_user', 'update_user', 'create_user');
+our @EXPORT = ('day_exists' ,'get_days', 'get_day', 'get_user', 'update_user', 'create_user', 'email_exists');
 
 use String::Random qw(random_string);
 use DBI;
@@ -151,6 +151,18 @@ sub create_user {
   $log->debug("Email not sent, possible lack of postfix") if $@;
 
   return $random_string;
+}
+
+sub email_exists {
+  my ($email) = @_;
+
+  my @array = $dbh->selectrow_array('
+    SELECT email
+    FROM user
+    WHERE email = ?
+  ', undef, $email);
+
+  return @array;
 }
 
 sub _truncate {

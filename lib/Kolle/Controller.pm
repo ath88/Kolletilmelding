@@ -316,6 +316,7 @@ sub valid_phone {
 sub valid_email {
   my $email = shift;
   return 'Ugyldig e-mail-adresse' unless Email::Valid->address( $email );
+  return 'E-mail-adressen findes allerede' if email_exists( $email );
   return undef;
 }
 
