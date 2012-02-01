@@ -20,8 +20,9 @@ my $app = new Mojolicious;
 my $title = "Mølleå Divisions Seniorkolleuge";
 my $debugmode = 0;
 
-$log->debug("MOJO_MODE is @{ [ $app->mode ] }");
-$debugmode = 1 if ($app->mode eq 'development');
+$debugmode = 1 if $app->mode eq 'development';
+$log->level('info') if $app->mode ne 'development';
+$log->info("MOJO_MODE is @{ [ $app->mode ] }");
 
 
 sub frontpage {
@@ -135,7 +136,7 @@ sub postedit {
     # decide on result
     if ( $result->{success} ) {
       my $role = ($data->{role} + 1);
-      my $ok = update_user($key, $post);
+      my $ok = update_user($key, $post, $self->tx->remote_address);
 
       if ( $ok ) {
         $success = 'Brugeren er opdateret';

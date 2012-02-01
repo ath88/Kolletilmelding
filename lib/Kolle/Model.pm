@@ -89,7 +89,7 @@ sub get_user {
 }
 
 sub update_user {
-  my ($key, $new) = @_;
+  my ($key, $new, $ip) = @_;
   delete $new->{type};
   my @bools = qw( bogger day1 day2 day3 day4 day5 day6 );
   foreach my $key (@bools) {
@@ -102,12 +102,13 @@ sub update_user {
   }
 
   my $old = get_user($key);
+  my $id = $old->{id};
   delete $old->{clanname};
   delete $old->{id};
   delete $old->{userkey};
   delete $old->{role};
   my $diff = _getDiffFromHashes( $old, $new );
-  $log->info( "Update, key = $key.\n$diff" ) if $diff;
+  $log->info( "User [$id] update, IP = [$ip]\n$diff" ) if $diff;
 
   return 0 unless $diff;
 
@@ -119,11 +120,11 @@ sub update_user {
 }
 
 sub create_user {
-  my ($firstname, $lastname, $role, $clanname, $email) = @_;
+  my ($firstname, $lastname, $role, $clanname, $email, $ip) = @_;
 
   # generate random string, and check if it already exists (really lucky if it does, though!)
   my $random_string;
-  do { $random_string = random_string('c'x40) } while ( get_user( $random_string ) );
+  do { $random_string = random_string('c'x60) } while ( get_user( $random_string ) );
 
   #create empty user
   $dbh->do('
@@ -176,11 +177,11 @@ sub _getDiffFromHashes {
   my $result;
   for my $key ( keys %{$hash1} ) {
     if ( !defined( $hash2->{$key} ) ) {
-      $result .= "Key: $key = no longer used\n";
+      $result .= "[$key] no longer used\n";
       next;
     }
     if ($hash1->{$key} ne $hash2->{$key}) {
-      $result .= "Key: $key = [" . $hash1->{$key} . '] becomes [' . $hash2->{$key} . "]\n";
+      $result .= "[$key] was [" . $hash1->{$key} . '], becomes [' . $hash2->{$key} . "]\n";
     }
   }
   for my $key ( keys %{$hash2} ) {
