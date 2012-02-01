@@ -47,16 +47,6 @@ sub get_days {
     FROM user
   ');
 
-  my ($day1, $day2, $day3, $day4, $day5, $day6);
-  foreach my $array (@{$array_ref}) {
-    $day1++ if $array->[4];
-    $day2++ if $array->[6];
-    $day3++ if $array->[8];
-    $day4++ if $array->[10];
-    $day5++ if $array->[12];
-    $day6++ if $array->[14];
-  }
-  
   return $array_ref;
 }
 
@@ -87,7 +77,7 @@ sub get_user {
     WHERE userkey = ?
   ',undef,$key);
 
-  if ($result_ref->{phone} ne '') {
+  if (defined $result_ref && $result_ref->{phone} ne '') {
     my @array = split(//,$result_ref->{phone});
     splice(@array,2,0,' ');
     splice(@array,5,0,' ');
