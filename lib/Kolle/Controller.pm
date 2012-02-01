@@ -102,8 +102,6 @@ sub postedit {
     $post->{lastname}  = camelize( $post->{lastname} );
     $post->{phone}     =~ s/\s//g; 
 
-    # can user edit this user (?)
-
 
     # validate data
     my %input = (
@@ -132,6 +130,11 @@ sub postedit {
     );
 
     my $result = validate( \%input, \%rules );
+
+    if ( email_exists( $post->{email} , $data->{id}) ) {
+      $error = 1;
+      $data->{error_msg}->{email} = 'E-mail-adressen findes allerede';
+    }
 
     # decide on result
     if ( $result->{success} ) {
@@ -200,6 +203,11 @@ sub postedit {
     );
     
     my $result = validate( \%input, \%rules );
+ 
+    if ( email_exists( $email ) ) {
+      $error = 1;
+      $data->{error_msg}->{new_email} = 'E-mail-adressen findes allerede';
+    }
 
     # decide on result
     if ( $result->{success} && !$error) {
@@ -212,7 +220,8 @@ sub postedit {
       }      
     } else {
       $data->{error} = 'new';
-      $data->{error_msg} = $result->{error};
+      $result->{error} = () unless defined %{$result->{error}};
+      $data->{error_msg} = { %{$data->{error_msg}}, %{$result->{error}} };
       $data->{'new_clanname'} = $clanname;
       $data->{'new_firstname'} = $firstname;
       $data->{'new_lastname'} = $lastname;
@@ -317,7 +326,6 @@ sub valid_phone {
 sub valid_email {
   my $email = shift;
   return 'Ugyldig e-mail-adresse' unless Email::Valid->address( $email );
-  return 'E-mail-adressen findes allerede' if email_exists( $email );
   return undef;
 }
 

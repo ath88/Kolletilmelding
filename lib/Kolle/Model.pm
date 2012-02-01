@@ -155,13 +155,24 @@ sub create_user {
 }
 
 sub email_exists {
-  my ($email) = @_;
+  my $email = shift;
+  my $id    = shift || undef;
 
-  my @array = $dbh->selectrow_array('
-    SELECT email
-    FROM user
-    WHERE email = ?
-  ', undef, $email);
+  my @array;
+  if ($id) {
+    @array = $dbh->selectrow_array('
+      SELECT email
+      FROM user
+      WHERE email = ? and id != ? 
+    ', undef, $email, $id);
+  }
+  else {
+    @array = $dbh->selectrow_array('
+      SELECT email
+      FROM user
+      WHERE email = ? 
+    ', undef, $email);
+  }
 
   return @array;
 }
