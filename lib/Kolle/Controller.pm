@@ -30,15 +30,27 @@ sub frontpage {
 
   my $data = get_days();
 
-  my $totals;
-  foreach my $array (@{$data}) {
-    $totals->{day1}++ if $array->[3];
-    $totals->{day2}++ if $array->[5];
-    $totals->{day3}++ if $array->[7];
-    $totals->{day4}++ if $array->[9];
-    $totals->{day5}++ if $array->[11];
-    $totals->{day6}++ if $array->[13];
+  my ($totals, @empty);
+  for my $i (0..$#{$data}) {
+    $totals->{day1}++ if $data->[$i]->[3];
+    $totals->{day2}++ if $data->[$i]->[5];
+    $totals->{day3}++ if $data->[$i]->[7];
+    $totals->{day4}++ if $data->[$i]->[9];
+    $totals->{day5}++ if $data->[$i]->[11];
+    $totals->{day6}++ if $data->[$i]->[13];
+
+    my $good = 0;
+    foreach my $day (@{$data->[$i]}[3,5,7,9,11,13]) {
+      if ($day == 1) {
+        $good = 1;
+        last; 
+      }
+    }
+    unshift(@empty, $i) if !$good;
   }
+
+  splice( @{$data}, $_, 1) foreach @empty;
+
 
   my $success;
   my $error = $self->session->{'error'};
