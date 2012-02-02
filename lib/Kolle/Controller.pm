@@ -213,7 +213,7 @@ sub postedit {
     # decide on result
     if ( $result->{success} && !$error) {
       my $role = ($data->{role} + 1);
-      my $ok = create_user($firstname, $lastname, $role, $clanname, $email); 
+      my $ok = create_user($firstname, $lastname, $role, $clanname, $email, $data->{id}, $self->tx->remote_address); 
 
       if ($ok ) {
         $success = 'Brugeren er oprettet og en email er sendt';

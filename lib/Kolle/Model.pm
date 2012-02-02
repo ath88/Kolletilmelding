@@ -119,7 +119,7 @@ sub update_user {
 }
 
 sub create_user {
-  my ($firstname, $lastname, $role, $clanname, $email, $ip) = @_;
+  my ($firstname, $lastname, $role, $clanname, $email, $id, $ip) = @_;
 
   # generate random string, and check if it already exists (really lucky if it does, though!)
   my $random_string;
@@ -130,6 +130,7 @@ sub create_user {
     INSERT INTO user (firstname, lastname, role, clanname, email, userkey)
     VALUES (?, ?, ?, ?, ?, ?)
   ', undef, $firstname, $lastname, $role, $clanname, $email, $random_string);
+  $log->info("User [$id] created user, IP = [$ip]\nFirstname: [$firstname]\nLastname: [$lastname]\nClanname: [$clanname]\nEmail: [$email]" ) if defined $id && defined $ip;
 
   #send mail to user
   $email = getlogin() . '@localhost' unless $app->mode eq 'production';
@@ -148,7 +149,12 @@ sub create_user {
   );
 
   eval { sendmail($mail) };
-  $log->warn("Email not sent:\n$@") if $@;
+  if ($@) {
+    $log->warn("Email not sent:\n$@");
+  }
+  else {
+    $log->info("Email sent to [$email}]");
+  }
 
   return $random_string;
 }
