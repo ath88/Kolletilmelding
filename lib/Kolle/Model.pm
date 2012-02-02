@@ -25,8 +25,7 @@ my $dbh = DBI->connect('DBI:mysql:kolle', 'root', '') || die "Could not connect 
 $dbh->{'mysql_enable_utf8'} = 1;
 $dbh->{'mysql_auto_reconnect'} = 1;
 
-#TODO remove default-adress
-my $baseurl = 'http://localhost/edit/';
+my $baseurl = 'http://senior.moelleaa.dk/edit/';
 
 my $days = { Monday    => 1, Mandag  => 1,
              Tuesday   => 2, Tirsdag => 2,
@@ -108,7 +107,7 @@ sub update_user {
   delete $old->{userkey};
   delete $old->{role};
   my $diff = _getDiffFromHashes( $old, $new );
-  $log->info( "User [$id] update, IP = [$ip]\n$diff" ) if $diff;
+  $log->info( "User [$id] update, IP = [$ip]\n$diff" ) if $diff && defined $id && defined $ip;
 
   return 0 unless $diff;
 
@@ -149,7 +148,7 @@ sub create_user {
   );
 
   eval { sendmail($mail) };
-  $log->warn("Email not sent, possible lack of postfix") if $@;
+  $log->warn("Email not sent:\n$@") if $@;
 
   return $random_string;
 }
