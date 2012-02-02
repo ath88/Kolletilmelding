@@ -149,7 +149,7 @@ sub create_user {
   );
 
   eval { sendmail($mail) };
-  $log->info("Email not sent, possible lack of postfix") if $@;
+  $log->warn("Email not sent, possible lack of postfix") if $@;
 
   return $random_string;
 }
@@ -159,16 +159,16 @@ sub email_exists {
   my $id    = shift || undef;
 
   my @array;
-  if ($id) {
+  if (defined $id) {
     @array = $dbh->selectrow_array('
-      SELECT email
+      SELECT id, email
       FROM user
       WHERE email = ? and id != ? 
     ', undef, $email, $id);
   }
   else {
     @array = $dbh->selectrow_array('
-      SELECT email
+      SELECT id, email
       FROM user
       WHERE email = ? 
     ', undef, $email);

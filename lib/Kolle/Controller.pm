@@ -133,11 +133,11 @@ sub postedit {
 
     if ( email_exists( $post->{email} , $data->{id}) ) {
       $error = 1;
-      $data->{error_msg}->{email} = 'E-mail-adressen findes allerede';
+      $data->{error_msg}->{email} = 'E-mailen findes allerede';
     }
 
     # decide on result
-    if ( $result->{success} ) {
+    if ( $result->{success} && !$error) {
       my $role = ($data->{role} + 1);
       my $ok = update_user($key, $post, $self->tx->remote_address);
 
@@ -148,7 +148,8 @@ sub postedit {
       }
     } else {
       $data->{error} = 'input';
-      $data->{error_msg} = $result->{error};
+#      $data->{error_msg} = $result->{error};
+      $data->{error_msg} = { %{$data->{error_msg}}, %{$result->{error}} };
 #      $data->{'firstname'} = $firstname;
 #      $data->{'lastname'} = $lastname;
 #      $data->{'phone'} = $phone;
@@ -206,7 +207,7 @@ sub postedit {
  
     if ( email_exists( $email ) ) {
       $error = 1;
-      $data->{error_msg}->{new_email} = 'E-mail-adressen findes allerede';
+      $data->{error_msg}->{new_email} = 'E-mailen findes allerede';
     }
 
     # decide on result
