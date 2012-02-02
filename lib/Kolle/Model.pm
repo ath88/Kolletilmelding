@@ -153,7 +153,7 @@ sub create_user {
     $log->warn("Email not sent:\n$@");
   }
   else {
-    $log->info("Email sent to [$email}]");
+    $log->info("Email sent to [$email]");
   }
 
   return $random_string;

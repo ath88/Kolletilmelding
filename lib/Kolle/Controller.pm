@@ -148,7 +148,6 @@ sub postedit {
       }
     } else {
       $data->{error} = 'input';
-#      $data->{error_msg} = $result->{error};
       $data->{error_msg} = { %{$data->{error_msg}}, %{$result->{error}} };
 #      $data->{'firstname'} = $firstname;
 #      $data->{'lastname'} = $lastname;
@@ -221,7 +220,6 @@ sub postedit {
       }      
     } else {
       $data->{error} = 'new';
-      $result->{error} = () unless defined %{$result->{error}};
       $data->{error_msg} = { %{$data->{error_msg}}, %{$result->{error}} };
       $data->{'new_clanname'} = $clanname;
       $data->{'new_firstname'} = $firstname;
