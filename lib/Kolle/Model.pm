@@ -133,17 +133,20 @@ sub create_user {
   $log->info("User [$id] created user, IP = [$ip]\nFirstname: [$firstname]\nLastname: [$lastname]\nClanname: [$clanname]\nEmail: [$email]" ) if defined $id && defined $ip;
 
   #send mail to user
-  $email = getlogin() . '@localhost' unless $app->mode eq 'production';
+#  $email =' ath88@localhost'; # getlogin() . '@localhost' unless $app->mode eq 'production';
+
+  my $name = $firstname;
+  $name .= " $lastname" if $lastname;
 
   my $body = 
-"Hej $firstname $lastname,\n\nDu er tilmeldt Mølleå Divisions Seniorkolleuge 2012. For at du kan deltage i bespisningen skal du fortælle hvornår du gerne vil spise med. Benyt derfor dette link til at tilmelde dig, og rette din tilmelding.\n\n$baseurl$random_string\n\nHvis du ikke er $firstname $lastname, så svar venligst på mailen, så vi kan fejlfinde på problemet.\n\nMed venlig hilsen\nMølleå Divisions Seniorkolleugeudvalg";
+"Hej $name,\n\nDu er tilmeldt Mølleå Divisions Seniorkolleuge 2012. For at du kan deltage i bespisningen skal du fortælle hvornår du gerne vil spise med. Benyt derfor dette personlige link til at tilmelde dig, og rette din tilmelding.\n\n$baseurl$random_string\n\nHvis du ikke er $name, så svar venligst på mailen, så vi kan fejlfinde på problemet.\n\nMed venlig hilsen\nMølleå Divisions Seniorkolleugeudvalg";
 
   my $mail = MIME::Entity->build(
     Type    => 'text/plain',
     Charset => "UTF-8",
     Encoding => 'quoted-printable',
     From    => encode('MIME-Header','Asbjørn <senior@moelleaa.dk>'),
-    To      => encode('MIME-Header',"$firstname $lastname <$email>"),
+    To      => encode('MIME-Header',"$name <$email>"),
     Subject => encode('MIME-Header',"Tilmelding til Divisionskolleugen"),
     Data    => encode('UTF-8',$body),
   );

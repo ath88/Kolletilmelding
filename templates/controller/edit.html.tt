@@ -8,7 +8,7 @@
     [% IF cont.role == 0 %]SuperKlanleder,[% END %]
     [% cont.clanname %]
   </h2>
-
+  <p>Tilmeldingen er først bindende klokken 12:00 på dagen,<br>og kan derfor rettes indtil da.</p>
   </center>
 
   <form name="input" action="[% cont.contkey %]" method="post">
