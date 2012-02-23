@@ -131,6 +131,7 @@ sub postedit {
 
     my $result = validate( \%input, \%rules );
 
+    $data->{error_msg} = {};
     if ( email_exists( $post->{email} , $data->{id}) ) {
       $error = 1;
       $data->{error_msg}->{email} = 'E-mailen findes allerede';
@@ -204,6 +205,7 @@ sub postedit {
     
     my $result = validate( \%input, \%rules );
  
+    $data->{error_msg} = {};
     if ( email_exists( $email ) ) {
       $error = 1;
       $data->{error_msg}->{new_email} = 'E-mailen findes allerede';
