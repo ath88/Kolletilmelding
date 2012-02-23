@@ -1,0 +1,28 @@
+[% WRAPPER layout.tt %]
+
+  <center>
+    <h1>- Infoside -</h1>
+    <p>Her kan du finde relevant information om M&oslash;lle&aring; Divisions Seniorkolleuge. Hvis du ikke kan finde det du leder efter, s&aring; skriv en mail til <a href="mailto:senior@moelleaa.dk">senior@moelleaa.dk</a>.
+  </center>
+
+  <ul>
+  <li><a href='#info'>Infoseddel</a>
+  <li><a href='#tilmelding'>Tilmelding</a>
+  <li><a href='#betaling'>Betaling</a>
+  </ul>
+
+  <h3 id='info'>Infoseddel</h3>
+  <p>Den seddel der blev delt ud og sendt rundt kan findes <a href='http://dl.dropbox.com/u/2025680/Invitation.pdf'>her</a>.</p>
+
+  <h3 id='tilmelding'>Tilmelding</h3>
+  <p>Tilmeldingen til kolleugen foreg&aring;r online. Din klanleder har send et privat link til dig, som du selv kan bruge til at tilmelde dig maden p&aring; den p&aring;g&aelig;ldende dag. Tilmeldingen lukker klokken 12:00 den p&aring;g&aelig;ldende dag, og derfra er tilmeldingen bindende, dvs. at man skal betale de 50kr det koster for maden om man kommer eller ej. Det er dog muligt at bruge kommentar-feltet til at &oslash;nske at &aelig;ndre sin tilmelding. Det er derefter op til madholdet den p&aring;g&aelig;ldende dag at vurdere om man skal betale eller ej. Med i prisen for maden er morgenmad, frokost (madpakke) og aftensmad. S&oslash;ndag vil der v&aelig;re brunch.</p>
+  
+
+  <h3 id='betaling'>Betaling</h3>
+  <p>Betaling for maden under kolleugen foreg&aring;r via bankoverf&oslash;rsel til f&oslash;lgende; Reg.nr.: 2261 Kontonr.: 0759410726</p>
+  <p>Vi vil meget gerne have betalingen inden vi skal bruge dem, s&aring; slipper vi for selv at have st&oslash;rre udl&aelig;g under kolleugen, og for at skulle inddrive dem bagefter. Hvis man har betalt for meget, s&aring; kan man selvf&oslash;lgelig f&aring; dem tilbage bagefter.</p>
+
+  <p><a href='/'>G&aring; til forsiden</a></p>
+
+[% END %]
+

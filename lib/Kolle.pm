@@ -30,6 +30,7 @@ sub startup {
   $r->route('/edit/:key')->via('POST')->to('controller#postedit');
   $r->route('/edit/:key')->to('controller#edit');
   $r->route('/dev')->to('controller#dev');
+  $r->route('/info')->to('controller#info');
 }
 
 1;

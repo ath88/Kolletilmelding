@@ -264,6 +264,17 @@ sub dev {
   return $self->render ( _build_response($data, $error, $success) );  
 }
 
+sub info {
+  my $self = shift;
+  $log->debug("Viewing info");
+
+  my $data;
+  my $error;
+  my $success;
+
+  return $self->render ( _build_response($data, $error, $success) );
+}
+
 
 ###### non-route subroutines ######
 
