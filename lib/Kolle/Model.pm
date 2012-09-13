@@ -35,14 +35,23 @@ if ($dbtype eq 'mysql') {
   $dbh->{'mysql_auto_reconnect'} = 1;
 }
 
-my $baseurl = 'http://senior.moelleaa.dk/edit/';
+if ($dbtype eq 'sqlite') {
+  $dbh->{sqlite_unicode} = 1;
+}
 
-my $days = { Monday    => 1, Mandag  => 1,
-             Tuesday   => 2, Tirsdag => 2,
-             Wednesday => 3, Onsdag  => 3,
-             Thursday  => 4, Torsdag => 4,
-             Friday    => 5, Fredag  => 5,
-             Saturday  => 6, Loerdag => 6,
+my $baseurl = 'http://kolleuge.moelleaa.dk/edit/';
+
+my $days = { 
+             Friday    =>  1, Fredag   =>  1,
+             Saturday  =>  2, Loerdag  =>  2,
+             Sunday    =>  3, Soendag  =>  3,
+             Monday    =>  4, Mandag   =>  4,
+             Tuesday   =>  5, Tirsdag  =>  5,
+             Wednesday =>  6, Onsdag   =>  6,
+             Thursday  =>  7, Torsdag  =>  7,
+             Friday2   =>  8, Fredag2  =>  8,
+             Saturday2 =>  9, Loerdag2 =>  9,
+             Sunday2   => 10, Soendag2 => 10,
 };
 
 sub day_exists {
@@ -52,7 +61,10 @@ sub day_exists {
 
 sub get_days {
   my $array_ref = $dbh->selectall_arrayref('
-    SELECT firstname, lastname, clanname, day1, comment1, day2, comment2, day3, comment3, day4, comment4, day5, comment5, day6, comment6, id, userkey
+    SELECT firstname, lastname, clanname, 
+           day1, comment1, day2, comment2, day3, comment3, day4, comment4, day5, comment5, 
+           day6, comment6, day7, comment7, day8, comment8, day9, comment9, day10, comment10, 
+	   id, userkey
     FROM user
   ');
 
@@ -86,21 +98,13 @@ sub get_user {
     WHERE userkey = ?
   ',undef,$key);
 
-  if (defined $result_ref && $result_ref->{phone} ne '') {
-    my @array = split(//,$result_ref->{phone});
-    splice(@array,2,0,' ');
-    splice(@array,5,0,' ');
-    splice(@array,8,0,' ');
-    $result_ref->{phone} = join('',@array); 
-  }
-
   return $result_ref;
 }
 
 sub update_user {
   my ($key, $new, $ip) = @_;
   delete $new->{type};
-  my @bools = qw( bogger day1 day2 day3 day4 day5 day6 );
+  my @bools = qw( bogger day1 day2 day3 day4 day5 day6 day7 day8 day9 day10 );
   foreach my $key (@bools) {
     if (defined $new->{$key} && $new->{$key} eq 'on') {
       $new->{$key} = 1;
@@ -123,9 +127,16 @@ sub update_user {
 
   return $dbh->do('
     UPDATE user 
-    SET firstname = ?, lastname = ?, phone = ?, email = ?, bogger = ?, day1 = ?, day2 = ?, day3 = ?, day4 = ?, day5 = ?, day6 = ?, comment1 = ?, comment2 = ?, comment3 = ?, comment4 = ?, comment5 = ?, comment6 = ?
+    SET firstname = ?, lastname = ?, phone = ?, email = ?, bogger = ?, 
+        day1 = ?, day2 = ?, day3 = ?, day4 = ?, day5 = ?, day6 = ?, day7 = ?, day8 = ?, day9 = ?, day10 = ?,
+        comment1 = ?, comment2 = ?, comment3 = ?, comment4 = ?, comment5 = ?, comment6 = ?, comment7 = ?, comment8 = ?, comment9 = ?, comment10 = ?
     WHERE userkey = ?
-  ',undef, $new->{firstname}, $new->{lastname}, $new->{phone}, $new->{email}, $new->{bogger}, $new->{day1}, $new->{day2}, $new->{day3}, $new->{day4}, $new->{day5}, $new->{day6}, $new->{comment1}, $new->{comment2}, $new->{comment3}, $new->{comment4}, $new->{comment5}, $new->{comment6}, $key);
+  ',undef, $new->{firstname}, $new->{lastname}, $new->{phone}, $new->{email}, $new->{bogger}, 
+           $new->{day1}, $new->{day2}, $new->{day3}, $new->{day4}, $new->{day5}, 
+           $new->{day6}, $new->{day7}, $new->{day8}, $new->{day9}, $new->{day10}, 
+           $new->{comment1} || '', $new->{comment2} || '', $new->{comment3} || '', $new->{comment4} || '', $new->{comment5}  || '', 
+           $new->{comment6} || '', $new->{comment7} || '', $new->{comment8} || '', $new->{comment9} || '', $new->{comment10} || '', 
+    $key);
 }
 
 sub create_user {
@@ -143,21 +154,21 @@ sub create_user {
   $log->info("User [$id] created user, IP = [$ip]\nFirstname: [$firstname]\nLastname: [$lastname]\nClanname: [$clanname]\nEmail: [$email]" ) if defined $id && defined $ip;
 
   #send mail to user
-#  $email =' ath88@localhost'; # getlogin() . '@localhost' unless $app->mode eq 'production';
+  $email =' ath88@localhost'; # getlogin() . '@localhost' unless $app->mode eq 'production';
 
   my $name = $firstname;
   $name .= " $lastname" if $lastname;
 
   my $body = 
-"Hej $name,\n\nDu er tilmeldt Mølleå Divisions Seniorkolleuge 2012. For at du kan deltage i bespisningen skal du fortælle hvornår du gerne vil spise med. Benyt derfor dette personlige link til at tilmelde dig, og rette din tilmelding.\n\n$baseurl$random_string\n\nHvis du ikke er $name, så svar venligst på mailen, så vi kan fejlfinde på problemet.\n\nMed venlig hilsen\nMølleå Divisions Seniorkolleugeudvalg";
+"Hej $name,\n\nKlan 2½'s Kolleuge er nær!!\nFor at du kan deltage i bespisningen skal du fortælle hvornår du gerne vil spise med. Benyt derfor dette personlige link til at tilmelde dig, og rette din tilmelding.\n\n$baseurl$random_string\n\nHvis du ikke er $name, så svar venligst på mailen, så vi kan fejlfinde på problemet.\n\nMed venlig hilsen\nAsbjørn på vejne af Kolleugeudvalget";
 
   my $mail = MIME::Entity->build(
     Type    => 'text/plain',
     Charset => "UTF-8",
     Encoding => 'quoted-printable',
-    From    => encode('MIME-Header','Asbjørn <senior@moelleaa.dk>'),
+    From    => encode('MIME-Header','Asbjørn <asbjoern@toenhalv.dk>'),
     To      => encode('MIME-Header',"$name <$email>"),
-    Subject => encode('MIME-Header',"Tilmelding til Divisionskolleugen"),
+    Subject => encode('MIME-Header',"Tilmelding til Klan 2½'s Kolleuge"),
     Data    => encode('UTF-8',$body),
   );
 

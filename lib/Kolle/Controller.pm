@@ -17,7 +17,7 @@ $Data::Dumper::Useperl = 1; # For proper dump of UTF-8 characters
 
 my $log = Mojo::Log->new; 
 my $app = new Mojolicious;
-my $title = "Mølleå Divisions Seniorkolleuge";
+my $title = "Klan 2½'s Kolleuge";
 my $debugmode = 0;
 
 $debugmode = 1 if $app->mode eq 'development';
@@ -102,7 +102,6 @@ sub postedit {
     $post->{lastname}  = camelize( $post->{lastname} );
     $post->{phone}     =~ s/\s//g; 
 
-
     # validate data
     my %input = (
       firstname => $post->{firstname},
@@ -128,6 +127,12 @@ sub postedit {
         email => \&valid_email,
       ]
     );
+
+    my @array = split(//,$post->{phone});
+    splice(@array,2,0,' ');
+    splice(@array,5,0,' ');
+    splice(@array,8,0,' ');
+    $post->{phone} = join('',@array);
 
     my $result = validate( \%input, \%rules );
 
