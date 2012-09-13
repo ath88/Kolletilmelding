@@ -19,11 +19,21 @@ use POSIX;
 use Mojo::Base qw(Mojolicious);
 use Mojo::Log;
 
+my $dbtype = 'sqlite';
+
+my $dbs = { mysql  => {connect => 'DBI:mysql:kolle'     , user => 'root', pass => ''},
+	    sqlite => {connect => 'dbi:SQLite:dbname=db', user => '',     pass => ''},
+};
+
+
 my $app = new Mojolicious;
 my $log = Mojo::Log->new;
-my $dbh = DBI->connect('DBI:mysql:kolle', 'root', '') || die "Could not connect to database: $DBI::errstr";
-$dbh->{'mysql_enable_utf8'} = 1;
-$dbh->{'mysql_auto_reconnect'} = 1;
+my $dbh = DBI->connect($dbs->{$dbtype}{connect},$dbs->{$dbtype}{user},$dbs->{$dbtype}{pass}) || die "Could not connect to database: $DBI::errstr";
+
+if ($dbtype eq 'mysql') {
+  $dbh->{'mysql_enable_utf8'} = 1;
+  $dbh->{'mysql_auto_reconnect'} = 1;
+}
 
 my $baseurl = 'http://senior.moelleaa.dk/edit/';
 
