@@ -38,12 +38,20 @@ CREATE TABLE `user` (
   `day4` tinyint(1) NOT NULL DEFAULT '0',
   `day5` tinyint(1) NOT NULL DEFAULT '0',
   `day6` tinyint(1) NOT NULL DEFAULT '0',
+  `day7` tinyint(1) NOT NULL DEFAULT '0',
+  `day8` tinyint(1) NOT NULL DEFAULT '0',
+  `day9` tinyint(1) NOT NULL DEFAULT '0',
+  `day10` tinyint(1) NOT NULL DEFAULT '0',
   `comment1` varchar(511) NOT NULL DEFAULT '',
   `comment2` varchar(511) NOT NULL DEFAULT '',
   `comment3` varchar(511) NOT NULL DEFAULT '',
   `comment4` varchar(511) NOT NULL DEFAULT '',
   `comment5` varchar(511) NOT NULL DEFAULT '',
   `comment6` varchar(511) NOT NULL DEFAULT '',
+  `comment7` varchar(511) NOT NULL DEFAULT '',
+  `comment8` varchar(511) NOT NULL DEFAULT '',
+  `comment9` varchar(511) NOT NULL DEFAULT '',
+  `comment10` varchar(511) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COMMENT='users';
 /*!40101 SET character_set_client = @saved_cs_client */;
