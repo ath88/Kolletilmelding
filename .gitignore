@@ -3,3 +3,4 @@ cache
 log/*
 log
 *.swp
+db
