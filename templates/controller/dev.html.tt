@@ -2,7 +2,7 @@
 
   [% FOREACH user IN cont %]
     <p>
-      [% user.15 %]: <a href='edit/[% user.16 %]'>[% user.0 %] [% user.1 %]</a>
+      [% user.15 %]: <a href='edit/[% user.24 %]'>[% user.0 %] [% user.1 %]</a>
     </p>
       
   [% END %]
