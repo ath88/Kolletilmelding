@@ -129,6 +129,7 @@ sub postedit {
         lastname => \&valid_name,
         phone => \&valid_phone,
         email => \&valid_email,
+        infopage => \&valid_infopage,
       ]
     );
 
@@ -350,6 +351,11 @@ sub valid_phone {
 sub valid_email {
   my $email = shift;
   return 'Ugyldig e-mail-adresse' unless Email::Valid->address( $email );
+  return undef;
+}
+sub valid_infopage {
+  my $infopage = shift;
+  return "Husk at læse infosiden før du gør noget dumt. ;)" unless defined($infopage) && $infopage eq 'on';
   return undef;
 }
 
