@@ -2,10 +2,4 @@
 
   <h2>[% message %]</h2>
 
-  <form name="input" action="hello123" method="post">
-    <input type="submit" value="Submit" />
-  </form>
-
-  postedit
-
 [% END %]
