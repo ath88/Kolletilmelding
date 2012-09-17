@@ -129,6 +129,7 @@ sub postedit {
         lastname => \&valid_name,
         phone => \&valid_phone,
         email => \&valid_email,
+        bogger => \&valid_bogger,
       ]
     );
 
@@ -347,6 +348,11 @@ sub valid_phone {
 sub valid_email {
   my $email = shift;
   return 'Ugyldig e-mail-adresse' unless Email::Valid->address( $email );
+  return undef;
+}
+sub valid_bogger {
+  my $bogger = shift;
+  return "Husk at læse infosiden før du gør noget dumt. ;)" unless defined($bogger) && $bogger eq 'on';
   return undef;
 }
 

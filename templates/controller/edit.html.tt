@@ -245,7 +245,7 @@
   </table>
   
   <br>
-  <input type='checkbox' name='bogger' [% IF cont.bogger %]checked[% END %]> Ja, jeg har læst hvad der står på <a href='/info'>infosiden</a>.<br>
+  <input type='checkbox' name='bogger' [% IF cont.bogger %]checked[% END %]> Ja, jeg har læst hvad der står på <a href='/info'>infosiden</a>. <span class='error'>[% cont.error_msg.bogger %]</span><br>
   <br>
 
   <input type="submit" value="Send" /><br>
