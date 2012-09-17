@@ -73,12 +73,12 @@ sub day {
     return $self->redirect_to ('/');
   }
 
-
   $log->debug("Viewing day '$weekday'");
 
   my $data = get_day($weekday);
 
   $weekday =~ s/oe/ø/;
+  $weekday =~ s/\d//;
 
   my $success;
   my $error;
