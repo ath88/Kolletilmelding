@@ -33,15 +33,19 @@ sub frontpage {
 
   my ($totals, @empty);
   for my $i (0..$#{$data}) {
-    $totals->{day1}++ if $data->[$i]->[3];
-    $totals->{day2}++ if $data->[$i]->[5];
-    $totals->{day3}++ if $data->[$i]->[7];
-    $totals->{day4}++ if $data->[$i]->[9];
-    $totals->{day5}++ if $data->[$i]->[11];
-    $totals->{day6}++ if $data->[$i]->[13];
+    $totals->{day1}++  if $data->[$i]->[3];
+    $totals->{day2}++  if $data->[$i]->[5];
+    $totals->{day3}++  if $data->[$i]->[7];
+    $totals->{day4}++  if $data->[$i]->[9];
+    $totals->{day5}++  if $data->[$i]->[11];
+    $totals->{day6}++  if $data->[$i]->[13];
+    $totals->{day7}++  if $data->[$i]->[15];
+    $totals->{day8}++  if $data->[$i]->[17];
+    $totals->{day9}++  if $data->[$i]->[19];
+    $totals->{day10}++ if $data->[$i]->[21];
 
     my $good = 0;
-    foreach my $day (@{$data->[$i]}[3,5,7,9,11,13]) {
+    foreach my $day (@{$data->[$i]}[3,5,7,9,11,13,15,17,19,21]) {
       if ($day == 1) {
         $good = 1;
         last; 

@@ -1,8 +1,8 @@
 [% WRAPPER layout.tt %]
 
   <center>
-    <h1>M&oslash;lle&aring; Divisions Seniorkolleuge</h1>
-    <h3>5. - 10. Marts 2012</h3>
+    <h1>Klan 2&frac12;'s Kolleuge</h1>
+    <h3>27. September - 7. Oktober 2012</h3>
     <p>Her kan du se hvem der er tilmeldt hvilke dage.<br>Tryk på en dag for at se flere detaljer.<br>Hold musen over en stjerne for at se kommentaren.</p>
     <p>Mere info om kolleugen kan findes på <a href='info'>infosiden</a></p>
 
@@ -10,6 +10,15 @@
     <tr class='header'>
       <td class='header'>
         <span class='header'>Navn:</span>
+      </td>
+      <td class='weekday'>
+        <a href='day/fredag'>Fredag</a>
+      </td>
+      <td class='weekday'>
+        <a href='day/loerdag'>L&oslash;rdag</a>
+      </td>
+      <td class='weekday'>
+        <a href='day/soendag'>S&oslash;ndag</a>
       </td>
       <td class='weekday'>
         <a href='day/mandag'>Mandag</a>
@@ -24,10 +33,13 @@
         <a href='day/torsdag'>Torsdag</a>
       </td>
       <td class='weekday'>
-        <a href='day/fredag'>Fredag</a>
+        <a href='day/fredag2'>Fredag</a>
       </td>
       <td class='weekday'>
-        <a href='day/loerdag'>L&oslash;rdag</a>
+        <a href='day/loerdag2'>L&oslash;rdag</a>
+      </td>
+      <td class='weekday'>
+        <a href='day/soendag2'>S&oslash;ndag</a>
       </td>
     </tr>
 
@@ -42,17 +54,25 @@
       <td class='bool'>[% IF user.9  %]X[% END %][% IF user.10  %]<a class='comment_star' title='[% user.10 %]'>*</a>[% END %]</td>
       <td class='bool'>[% IF user.11 %]X[% END %][% IF user.12  %]<a class='comment_star' title='[% user.12 %]'>*</a>[% END %]</td>
       <td class='bool'>[% IF user.13 %]X[% END %][% IF user.14  %]<a class='comment_star' title='[% user.14 %]'>*</a>[% END %]</td>
+      <td class='bool'>[% IF user.15 %]X[% END %][% IF user.16  %]<a class='comment_star' title='[% user.16 %]'>*</a>[% END %]</td>
+      <td class='bool'>[% IF user.17 %]X[% END %][% IF user.18  %]<a class='comment_star' title='[% user.18 %]'>*</a>[% END %]</td>
+      <td class='bool'>[% IF user.19 %]X[% END %][% IF user.20  %]<a class='comment_star' title='[% user.20 %]'>*</a>[% END %]</td>
+      <td class='bool'>[% IF user.21 %]X[% END %][% IF user.22  %]<a class='comment_star' title='[% user.22 %]'>*</a>[% END %]</td>
     </tr>
     [% END %]
     [% count = (count + 1) mod 2 %]
     <tr [% IF count == 0 %]class='header'[% END %]>
       <td><span class='header'>I alt:</span></td>
-      <td class='bool'><span class='header'>[% day1 %]</span></td>
-      <td class='bool'><span class='header'>[% day2 %]</span></td>
-      <td class='bool'><span class='header'>[% day3 %]</span></td>
-      <td class='bool'><span class='header'>[% day4 %]</span></td>
-      <td class='bool'><span class='header'>[% day5 %]</span></td>
-      <td class='bool'><span class='header'>[% day6 %]</span></td>
+      <td class='bool'><span class='header'>[% day1  %]</span></td>
+      <td class='bool'><span class='header'>[% day2  %]</span></td>
+      <td class='bool'><span class='header'>[% day3  %]</span></td>
+      <td class='bool'><span class='header'>[% day4  %]</span></td>
+      <td class='bool'><span class='header'>[% day5  %]</span></td>
+      <td class='bool'><span class='header'>[% day6  %]</span></td>
+      <td class='bool'><span class='header'>[% day7  %]</span></td>
+      <td class='bool'><span class='header'>[% day8  %]</span></td>
+      <td class='bool'><span class='header'>[% day9  %]</span></td>
+      <td class='bool'><span class='header'>[% day10 %]</span></td>
     </tr>
   </table>
 
