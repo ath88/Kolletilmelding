@@ -1,14 +1,15 @@
 PRAGMA synchronous = OFF;
 PRAGMA journal_mode = MEMORY;
 BEGIN TRANSACTION;
+DROP TABLE user;
 CREATE TABLE "user" (
-  "id" int(11) NOT NULL, --COMMENT 'users id',
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, --COMMENT 'users id',
   "role" int(11) NOT NULL DEFAULT '2', --COMMENT 'users role, 1 = leader, 2 = member',
   "clanname" varchar(255) NOT NULL, --COMMENT 'users clanname',
-  "email" varchar(255) NOT NULL, --COMMENT 'users email',
-  "phone" varchar(31) NOT NULL, --COMMENT 'users phone',
+  "email" varchar(255) NOT NULL DEFAULT '', --COMMENT 'users email',
+  "phone" varchar(31) NOT NULL DEFAULT '', --COMMENT 'users phone',
   "firstname" varchar(255) NOT NULL, --COMMENT 'users firstname',
-  "lastname" varchar(255) NOT NULL, --COMMENT 'users lastname',
+  "lastname" varchar(255) NOT NULL DEFAULT '', --COMMENT 'users lastname',
   "bogger" tinyint(1) NOT NULL DEFAULT '0',
   "userkey" varchar(63) NOT NULL, --COMMENT 'random string for user-editing',
   "day1" tinyint(1) NOT NULL DEFAULT '0',
@@ -30,7 +31,9 @@ CREATE TABLE "user" (
   "comment7" varchar(511) NOT NULL DEFAULT '',
   "comment8" varchar(511) NOT NULL DEFAULT '',
   "comment9" varchar(511) NOT NULL DEFAULT '',
-  "comment10" varchar(511) NOT NULL DEFAULT '',
-  PRIMARY KEY ("id")
+  "comment10" varchar(511) NOT NULL DEFAULT ''
 );
 END TRANSACTION;
+
+INSERT INTO user(role,clanname,firstname,userkey) values(0,'Klan 2½','Asbjørn','hubkskfeabehstblqvbesunjzpipuhncwltzkbqzcyazqjmnsohgptxlsope');
+
