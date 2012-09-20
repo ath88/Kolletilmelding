@@ -7,12 +7,14 @@ sub startup {
 
   $self->secret('some of the text formatting properties. The heading uses the');
  
+  my $user = getlogin() || '';
+
  # Tell Mojolicious we want to load the TT renderer plugin
   $self->plugin(tt_renderer => {
     template_options => {
       # These options are specific to TT
       INCLUDE_PATH => "/home/ath88/repos/Kolletilmelding/templates",
-      COMPILE_DIR => '/tmp/cache',
+      COMPILE_DIR => "/tmp/cache/$user",
       COMPILE_EXT => '.ttc',
       # ... anything else to be passed on to TT should go here
     },
