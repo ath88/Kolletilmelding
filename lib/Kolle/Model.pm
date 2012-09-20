@@ -39,7 +39,7 @@ if ($dbtype eq 'sqlite') {
   $dbh->{sqlite_unicode} = 1;
 }
 
-my $baseurl = 'http://kolleuge.moelleaa.dk/edit/';
+my $baseurl = 'http://kolleuge.toenhalv.dk/edit/';
 
 my $days = { 
              Friday    =>  1, Fredag   =>  1,
@@ -154,7 +154,8 @@ sub create_user {
   $log->info("User [$id] created user, IP = [$ip]\nFirstname: [$firstname]\nLastname: [$lastname]\nClanname: [$clanname]\nEmail: [$email]" ) if defined $id && defined $ip;
 
   #send mail to user
-  $email =' ath88@localhost'; # getlogin() . '@localhost' unless $app->mode eq 'production';
+  #$email =' ath88@localhost'; 
+  $email = getlogin() . '@localhost' unless $app->mode eq 'production';
 
   my $name = $firstname;
   $name .= " $lastname" if $lastname;
