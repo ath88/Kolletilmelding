@@ -129,6 +129,15 @@ sub postedit {
       ]
     );
 
+    chomp $post->{phone};
+    if ($post->{phone} ne '') {
+      my @array = split(//,$post->{phone});
+      splice(@array,2,0,' ');
+      splice(@array,5,0,' ');
+      splice(@array,8,0,' ');
+      $post->{phone} = join('',@array);
+    }
+
     my $result = validate( \%input, \%rules );
 
     $data->{error_msg} = {};
