@@ -4,8 +4,8 @@
   <h1>[% cont.firstname %] [% cont.lastname %]</h1>
   <h2>
     [% IF cont.role == 2 %]Klanspejder,[% END %]
-    [% IF cont.role == 1 %]Klanleder,[% END %]
-    [% IF cont.role == 0 %]SuperKlanleder,[% END %]
+    [% IF cont.role == 1 %]Substitueret Klanleder,[% END %]
+    [% IF cont.role == 0 %]Klanleder,[% END %]
     [% cont.clanname %]
   </h2>
   <p>Tilmeldingen er først bindende klokken 00:00 på dagen,<br>og kan derfor rettes indtil da.</p>
