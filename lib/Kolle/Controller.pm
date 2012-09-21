@@ -32,6 +32,7 @@ sub frontpage {
   my $data = get_days();
 
   my ($totals, @empty);
+  $totals = {day1 => 0, day2 => 0, day3 => 0, day4 => 0, day5 => 0, day6 => 0, day7 => 0, day8 => 0, day9 => 0, day10 => 0};
   for my $i (0..$#{$data}) {
     $totals->{day1}++ if $data->[$i]->[3];
     $totals->{day2}++ if $data->[$i]->[5];
