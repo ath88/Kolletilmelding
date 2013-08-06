@@ -37,12 +37,14 @@ if ($dbtype eq 'mysql') {
 
 my $baseurl = 'http://senior.moelleaa.dk/edit/';
 
-my $days = { Monday    => 1, Mandag  => 1,
-             Tuesday   => 2, Tirsdag => 2,
-             Wednesday => 3, Onsdag  => 3,
-             Thursday  => 4, Torsdag => 4,
-             Friday    => 5, Fredag  => 5,
-             Saturday  => 6, Loerdag => 6,
+my $days = { 
+             Sunday    => 1, Soendag => 1,
+             Monday    => 2, Mandag  => 2,
+             Tuesday   => 3, Tirsdag => 3,
+             Wednesday => 4, Onsdag  => 4,
+             Thursday  => 5, Torsdag => 5,
+             Friday    => 6, Fredag  => 6,
+             Saturday  => 7, Loerdag => 7,
 };
 
 sub day_exists {
@@ -52,7 +54,7 @@ sub day_exists {
 
 sub get_days {
   my $array_ref = $dbh->selectall_arrayref('
-    SELECT firstname, lastname, clanname, day1, comment1, day2, comment2, day3, comment3, day4, comment4, day5, comment5, day6, comment6, id, userkey
+    SELECT firstname, lastname, clanname, day1, comment1, day2, comment2, day3, comment3, day4, comment4, day5, comment5, day6, comment6, day7, comment7, id, userkey
     FROM user
   ');
 
@@ -92,7 +94,7 @@ sub get_user {
 sub update_user {
   my ($key, $new, $ip) = @_;
   delete $new->{type};
-  my @bools = qw( bogger day1 day2 day3 day4 day5 day6 );
+  my @bools = qw( bogger infopage day1 day2 day3 day4 day5 day6 day7);
   foreach my $key (@bools) {
     if (defined $new->{$key} && $new->{$key} eq 'on') {
       $new->{$key} = 1;
@@ -115,9 +117,12 @@ sub update_user {
 
   return $dbh->do('
     UPDATE user 
-    SET firstname = ?, lastname = ?, phone = ?, email = ?, bogger = ?, day1 = ?, day2 = ?, day3 = ?, day4 = ?, day5 = ?, day6 = ?, comment1 = ?, comment2 = ?, comment3 = ?, comment4 = ?, comment5 = ?, comment6 = ?
+    SET firstname = ?, lastname = ?, phone = ?, email = ?, bogger = ?, infopage = ?, day1 = ?, day2 = ?, day3 = ?, day4 = ?, day5 = ?, day6 = ?, day7 = ?, comment1 = ?, comment2 = ?, comment3 = ?, comment4 = ?, comment5 = ?, comment6 = ?, comment7 = ?
     WHERE userkey = ?
-  ',undef, $new->{firstname}, $new->{lastname}, $new->{phone}, $new->{email}, $new->{bogger}, $new->{day1}, $new->{day2}, $new->{day3}, $new->{day4}, $new->{day5}, $new->{day6}, $new->{comment1}, $new->{comment2}, $new->{comment3}, $new->{comment4}, $new->{comment5}, $new->{comment6}, $key);
+  ',undef, $new->{firstname}, $new->{lastname}, $new->{phone}, $new->{email}, $new->{bogger}, $new->{infopage},
+           $new->{day1}, $new->{day2}, $new->{day3}, $new->{day4}, $new->{day5}, $new->{day6}, $new->{day7}, 
+           $new->{comment1}, $new->{comment2}, $new->{comment3}, $new->{comment4}, $new->{comment5}, $new->{comment6}, $new->{comment7},
+           $key);
 }
 
 sub create_user {
@@ -141,7 +146,7 @@ sub create_user {
   $name .= " $lastname" if $lastname;
 
   my $body = 
-"Hej $name,\n\nDu er tilmeldt Mølleå Divisions Seniorkolleuge 2012. For at du kan deltage i bespisningen skal du fortælle hvornår du gerne vil spise med. Benyt derfor dette personlige link til at tilmelde dig, og rette din tilmelding.\n\n$baseurl$random_string\n\nHvis du ikke er $name, så svar venligst på mailen, så vi kan fejlfinde på problemet.\n\nMed venlig hilsen\nMølleå Divisions Seniorkolleugeudvalg";
+"Hej $name,\n\nDu er tilmeldt Mølleå Divisions Seniorkolleuge 2013. For at du kan deltage i bespisningen skal du fortælle hvornår du gerne vil spise med. Benyt derfor dette personlige link til at tilmelde dig, og rette din tilmelding.\n\n$baseurl$random_string\n\nHvis du ikke er $name, så svar venligst på mailen, så vi kan fejlfinde på problemet.\n\nMed venlig hilsen\nMølleå Divisions Seniorkolleugeudvalg";
 
   my $mail = MIME::Entity->build(
     Type    => 'text/plain',

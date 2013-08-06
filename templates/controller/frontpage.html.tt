@@ -2,7 +2,7 @@
 
   <center>
     <h1>M&oslash;lle&aring; Divisions Seniorkolleuge</h1>
-    <h3>5. - 10. Marts 2012</h3>
+    <h3>25. - 31. August 2013</h3>
     <p>Her kan du se hvem der er tilmeldt hvilke dage.<br>Tryk på en dag for at se flere detaljer.<br>Hold musen over en stjerne for at se kommentaren.</p>
     <p>Mere info om kolleugen kan findes på <a href='info'>infosiden</a></p>
 
@@ -10,6 +10,9 @@
     <tr class='header'>
       <td class='header'>
         <span class='header'>Navn:</span>
+      </td>
+      <td class='weekday'>
+        <a href='day/soendag'>S&oslash;ndag</a>
       </td>
       <td class='weekday'>
         <a href='day/mandag'>Mandag</a>
@@ -35,13 +38,14 @@
     [% FOREACH user IN cont %]
     [% count = (count + 1) mod 2 %]
     <tr [% IF count == 0 %]class='header'[% END %]>
-      <td>[% user.0 %] [% user.1 %]</td>
+      <td><a title='[% user.2 %]'>[% user.0 %] [% user.1 %]</a></td>
       <td class='bool'>[% IF user.3  %]X[% END %][% IF user.4   %]<a class='comment_star' title='[% user.4  %]'>*</a>[% END %]</td>
       <td class='bool'>[% IF user.5  %]X[% END %][% IF user.6   %]<a class='comment_star' title='[% user.6  %]'>*</a>[% END %]</td>
       <td class='bool'>[% IF user.7  %]X[% END %][% IF user.8   %]<a class='comment_star' title='[% user.8  %]'>*</a>[% END %]</td>
       <td class='bool'>[% IF user.9  %]X[% END %][% IF user.10  %]<a class='comment_star' title='[% user.10 %]'>*</a>[% END %]</td>
       <td class='bool'>[% IF user.11 %]X[% END %][% IF user.12  %]<a class='comment_star' title='[% user.12 %]'>*</a>[% END %]</td>
       <td class='bool'>[% IF user.13 %]X[% END %][% IF user.14  %]<a class='comment_star' title='[% user.14 %]'>*</a>[% END %]</td>
+      <td class='bool'>[% IF user.15 %]X[% END %][% IF user.16  %]<a class='comment_star' title='[% user.16 %]'>*</a>[% END %]</td>
     </tr>
     [% END %]
     [% count = (count + 1) mod 2 %]
@@ -53,6 +57,7 @@
       <td class='bool'><span class='header'>[% day4 %]</span></td>
       <td class='bool'><span class='header'>[% day5 %]</span></td>
       <td class='bool'><span class='header'>[% day6 %]</span></td>
+      <td class='bool'><span class='header'>[% day7 %]</span></td>
     </tr>
   </table>
 
