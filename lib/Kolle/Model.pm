@@ -146,13 +146,13 @@ sub create_user {
   $name .= " $lastname" if $lastname;
 
   my $body = 
-"Hej $name,\n\nDu er tilmeldt Mølleå Divisions Seniorkolleuge 2013. For at du kan deltage i bespisningen skal du fortælle hvornår du gerne vil spise med. Benyt derfor dette personlige link til at tilmelde dig, og rette din tilmelding.\n\n$baseurl$random_string\n\nHvis du ikke er $name, så svar venligst på mailen, så vi kan fejlfinde på problemet.\n\nMed venlig hilsen\nMølleå Divisions Seniorkolleugeudvalg";
+"Hej $name,<br><br>Du er tilmeldt Mølleå Divisions Seniorkolleuge 2013. For at du kan deltage i bespisningen skal du fortælle hvornår du gerne vil spise med. Benyt derfor dette personlige link til at tilmelde dig, og rette din tilmelding.<br><br><a href='$baseurl$random_string'>Tilmelding</a><br><br>Hvis du ikke er $name, så svar venligst på mailen, så vi kan fejlfinde på problemet.<br><br>Med venlig hilsen<br>Mølleå Divisions Seniorkolleugeudvalg";
 
   my $mail = MIME::Entity->build(
-    Type    => 'text/plain',
+    Type    => 'text/html',
     Charset => "UTF-8",
     Encoding => 'quoted-printable',
-    From    => encode('MIME-Header','Asbjørn <senior@moelleaa.dk>'),
+    From    => encode('MIME-Header','Asbjørn <senior@aths.dk>'),
     To      => encode('MIME-Header',"$name <$email>"),
     Subject => encode('MIME-Header',"Tilmelding til Divisionskolleugen"),
     Data    => encode('UTF-8',$body),
