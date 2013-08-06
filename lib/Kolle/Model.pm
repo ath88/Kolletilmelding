@@ -19,7 +19,7 @@ use POSIX;
 use Mojo::Base qw(Mojolicious);
 use Mojo::Log;
 
-my $dbtype = 'sqlite';
+my $dbtype = 'mysql';
 
 my $dbs = { mysql  => {connect => 'DBI:mysql:kolle'     , user => 'root', pass => ''},
 	    sqlite => {connect => 'dbi:SQLite:dbname=db', user => '',     pass => ''},
@@ -85,14 +85,6 @@ sub get_user {
     FROM user
     WHERE userkey = ?
   ',undef,$key);
-
-  if (defined $result_ref && $result_ref->{phone} ne '') {
-    my @array = split(//,$result_ref->{phone});
-    splice(@array,2,0,' ');
-    splice(@array,5,0,' ');
-    splice(@array,8,0,' ');
-    $result_ref->{phone} = join('',@array); 
-  }
 
   return $result_ref;
 }
