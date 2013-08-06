@@ -112,11 +112,11 @@ sub postedit {
       phone => $post->{phone},
       email => $post->{email},
       bogger => $post->{bogger},
-      bogger => $post->{info},
+      infopage => $post->{infopage},
     );
 
     my %rules = (
-      fields => [ 'firstname', 'lastname', 'phone', 'email', 'bogger' ],
+      fields => [ 'firstname', 'lastname', 'phone', 'email', 'bogger', 'infopage' ],
       checks => [
         [ qw/firstname lastname email/ ] => sub {
           my $value = shift;

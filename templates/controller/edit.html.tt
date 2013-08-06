@@ -197,7 +197,7 @@
   </table>
   
   <br>
-  <input type='checkbox' name='infopage' [% IF cont.infopage %]checked[% END %]> Ja, jeg har læst hvad der står på <a href='/info'>infosiden</a>. <span class='error'>[% cont.error_msg.infopage %]</span><br>
+  <input type='checkbox' name='infopage' [% IF cont.infopage %]checked[% END %]> Ja, jeg har læst hvad der står på <a href='/info'>infosiden</a>. <br><span class='error'>[% cont.error_msg.infopage %]</span><br>
   <input type='checkbox' name='bogger' [% IF cont.bogger %]checked[% END %]> Ja, Bogger må godt bruge mine data herfra til videre kontakt.<br>
   <br>
 
